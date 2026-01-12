@@ -1,0 +1,2922 @@
+        {
+            title: "African Folk / Ethnic Music",
+            logo: "http://radcap.ru/stylegraf/africanfolk.jpg",
+            stream: "http://79.120.39.202:8000/africanfolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Afrobeat / Afrobeats",
+            logo: "http://radcap.ru/stylegraf/afrobeat1.jpg",
+            stream: "http://79.120.39.202:8000/afrobeat",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Americana / American Roots Music",
+            logo: "http://radcap.ru/stylegraf/americana1.jpg",
+            stream: "http://213.141.131.10:8000/americana",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Andean / South American Music",
+            logo: "http://radcap.ru/stylegraf/andean.jpg",
+            stream: "http://213.141.131.10:8000/andean",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Balkan Music",
+            logo: "http://radcap.ru/stylegraf/balkan.jpg",
+            stream: "http://79.120.39.202:8000/balkan",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Caucasian Music",
+            logo: "http://radcap.ru/stylegraf/caucasus1.jpg",
+            stream: "http://213.141.131.10:8000/caucasus",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Celtic Music / Celtic Fusion",
+            logo: "http://radcap.ru/stylegraf/celtic1.jpg",
+            stream: "http://79.111.14.76:8000/celtic",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "European / Western Folk Music",
+            logo: "http://radcap.ru/stylegraf/eurofolk.jpg",
+            stream: "http://213.141.131.10:8000/europeanfolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Fado (portuguese Music)",
+            logo: "http://radcap.ru/stylegraf/fado4.jpg",
+            stream: "http://213.141.131.10:8000/fado",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Far Eastern Traditional Music",
+            logo: "http://radcap.ru/stylegraf/fareast.jpg",
+            stream: "http://79.111.119.111:8000/fareast",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Flamenco (spain / Andalusian Music)",
+            logo: "http://radcap.ru/stylegraf/flamenco1.jpg",
+            stream: "http://79.111.14.76:8000/flamenco",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Gospel / Spirituals Music",
+            logo: "http://radcap.ru/stylegraf/gospel1.jpg",
+            stream: "http://79.111.14.76:8000/gospel",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Indian Classical / Folk / Ethnic",
+            logo: "http://radcap.ru/stylegraf/indian1.jpg",
+            stream: "http://79.111.14.76:8000/indianfolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Indian Spiritual Music (mantras, Bhajans, Kirtans...)",
+            logo: "http://radcap.ru/stylegraf/mantras.jpg",
+            stream: "http://213.141.131.10:8000/mantras",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Jewish Music / Klezmer",
+            logo: "http://radcap.ru/stylegraf/klezmer2.jpg",
+            stream: "http://79.120.39.202:8000/klezmer",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Laiko / Greek Music",
+            logo: "http://radcap.ru/stylegraf/laika2.jpg",
+            stream: "http://79.111.119.111:8000/laika",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Medieval Folk",
+            logo: "http://radcap.ru/stylegraf/medievalfolk.jpg",
+            stream: "http://213.141.131.10:8000/medievalfolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Middle Eastern Traditional Music",
+            logo: "http://radcap.ru/stylegraf/middleeast.jpg",
+            stream: "http://79.111.119.111:8000/middleeast",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Music Of Siberia / Mongolia",
+            logo: "http://radcap.ru/stylegraf/siberia.jpg",
+            stream: "http://79.111.119.111:8000/siberia",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Native American Music",
+            logo: "http://radcap.ru/stylegraf/natam4.jpg",
+            stream: "http://79.111.119.111:8000/nativeamerican",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Oceanian / Australian /...",
+            logo: "http://radcap.ru/stylegraf/oceania2.jpg",
+            stream: "http://213.141.131.10:8000/oceania",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Orthodox Spiritual Music",
+            logo: "http://radcap.ru/stylegraf/orthodox2.jpg",
+            stream: "http://79.111.14.76:8000/orthodox",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Russian Folk Music / Songs",
+            logo: "http://radcap.ru/stylegraf/russian1.jpg",
+            stream: "http://79.120.77.11:8000/russianfolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Slavic Neofolk Music",
+            logo: "http://radcap.ru/stylegraf/slavonic.jpg",
+            stream: "http://213.141.131.10:8000/slavonicneofolk",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Tango / Argentine / Nuevo Tango",
+            logo: "http://radcap.ru/stylegraf/tango1.jpg",
+            stream: "http://79.120.39.202:8000/tango",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Traditional Latin Music",
+            logo: "http://radcap.ru/stylegraf/salsa.jpg",
+            stream: "http://79.120.39.202:8000/salsa",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Zydeco / Cajun / Creole Music",
+            logo: "http://radcap.ru/stylegraf/zydeco2.jpg",
+            stream: "http://213.141.131.10:8000/zydeco",
+            genre: "ETHNIC / FOLK / SPIRITUAL"
+        },
+        {
+            title: "Cantata",
+            logo: "http://radcap.ru/stylegraf/cantata.jpg",
+            stream: "http://79.120.12.130:8000/cantata",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Cello / Violoncello",
+            logo: "http://radcap.ru/stylegraf/cello.jpg",
+            stream: "http://79.120.12.130:8000/cello",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Chamber Music (classical)",
+            logo: "http://radcap.ru/stylegraf/chamber3.jpg",
+            stream: "http://213.141.131.10:8000/chamber",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Chants / Gregorian Chants",
+            logo: "http://radcap.ru/stylegraf/chant.jpg",
+            stream: "http://213.141.131.10:8000/chants",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Christian Sacred Music",
+            logo: "http://radcap.ru/stylegraf/sacred1.jpg",
+            stream: "http://213.141.131.10:8000/sacred",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Clarinet / Bassoon / Oboe",
+            logo: "http://radcap.ru/stylegraf/clarinet3.jpg",
+            stream: "http://213.141.131.10:8000/clarinet",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Avant-Garde",
+            logo: "http://radcap.ru/stylegraf/classavant.jpg",
+            stream: "http://213.141.131.10:8000/classavant",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Baroque Music",
+            logo: "http://radcap.ru/stylegraf/baroque2.jpg",
+            stream: "http://79.111.14.76:8000/baroque",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Choral / Vocal Music (cantata / Missa / Oratorio)",
+            logo: "http://radcap.ru/stylegraf/gregorian1.jpg",
+            stream: "http://79.120.39.202:8000/chorus",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Guitar",
+            logo: "http://radcap.ru/stylegraf/classguitar1.jpg",
+            stream: "http://213.141.131.10:8000/classguitar",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Piano Music",
+            logo: "http://radcap.ru/stylegraf/classicalpiano1.jpg",
+            stream: "http://79.120.39.202:8000/classpiano",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Classical Symphonic Music",
+            logo: "http://radcap.ru/stylegraf/symphonic.jpg",
+            stream: "http://79.120.77.11:8000/classical",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Clavecin / Cembalo / Harpsichord",
+            logo: "http://radcap.ru/stylegraf/clavecin2.jpg",
+            stream: "http://213.141.131.10:8000/clavecin",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Contemporary Classical Music",
+            logo: "http://radcap.ru/stylegraf/contclass.jpg",
+            stream: "http://79.111.119.111:8000/contclass",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Harp",
+            logo: "http://radcap.ru/stylegraf/harp1.jpg",
+            stream: "http://213.141.131.10:8000/harp",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Impressionism (classical Music)",
+            logo: "http://radcap.ru/stylegraf/impressionism1.jpg",
+            stream: "http://79.120.12.130:8000/impressionism",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Lute / Archlute / Theorbo",
+            logo: "http://radcap.ru/stylegraf/lute.jpg",
+            stream: "http://79.120.12.130:8000/lute",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Medieval Music",
+            logo: "http://radcap.ru/stylegraf/medieval1.jpg",
+            stream: "http://213.141.131.10:8000/medieval",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Minimalism / Postminimalism",
+            logo: "http://radcap.ru/stylegraf/minimalism.jpg",
+            stream: "http://213.141.131.10:8000/minimalism",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Opera",
+            logo: "http://radcap.ru/stylegraf/opera1.jpg",
+            stream: "http://79.120.39.202:8000/opera",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Oratorio / Oratorium",
+            logo: "http://radcap.ru/stylegraf/oratorio.jpg",
+            stream: "http://79.120.12.130:8000/oratorio",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Organ Music",
+            logo: "http://radcap.ru/stylegraf/organ1.jpg",
+            stream: "http://79.120.77.11:8000/organ",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Renaissance Music",
+            logo: "http://radcap.ru/stylegraf/renaissance.jpg",
+            stream: "http://213.141.131.10:8000/renaissance",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Sonatas",
+            logo: "http://radcap.ru/stylegraf/sonata.jpg",
+            stream: "http://213.141.131.10:8000/sonata",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Strings (violin, Viola, Cello, Double Bass)",
+            logo: "http://radcap.ru/stylegraf/strings.jpg",
+            stream: "http://79.120.39.202:8000/strings",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Symphony",
+            logo: "http://radcap.ru/stylegraf/symphony1.jpg",
+            stream: "http://79.111.14.76:8000/symphony",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Violin / Violino",
+            logo: "http://radcap.ru/stylegraf/violin1.jpg",
+            stream: "http://213.141.131.10:8000/violin",
+            genre: "CLASSICAL"
+        },
+        {
+            title: "Acoustic Blues",
+            logo: "http://radcap.ru/stylegraf/acousticdlues2.jpg",
+            stream: "http://79.111.14.76:8000/acousticblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Blues",
+            logo: "http://radcap.ru/stylegraf/blues2.jpg",
+            stream: "http://79.120.77.11:8000/blues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Chicago Blues",
+            logo: "http://radcap.ru/stylegraf/chicagoblues1.jpg",
+            stream: "http://79.111.14.76:8000/chicagoblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Country / Folk Blues",
+            logo: "http://radcap.ru/stylegraf/countryblues.jpg",
+            stream: "http://79.120.77.11:8000/countryblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Delta Blues",
+            logo: "http://radcap.ru/stylegraf/deltablues3.jpg",
+            stream: "http://79.120.77.11:8000/deltablues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Electric / Modern Electric Blues",
+            logo: "http://radcap.ru/stylegraf/modelblues3.jpg",
+            stream: "http://79.111.14.76:8000/electricblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Funk",
+            logo: "http://radcap.ru/stylegraf/funk2.jpg",
+            stream: "http://79.111.119.111:8000/funk",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Harmonica / Harp Blues",
+            logo: "http://radcap.ru/stylegraf/harmonicablues2.jpg",
+            stream: "http://79.120.39.202:8000/harpblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Heavy / Hard Blues",
+            logo: "http://radcap.ru/stylegraf/hardblues.jpg",
+            stream: "http://79.120.77.11:8000/heavyblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Jump Blues",
+            logo: "http://radcap.ru/stylegraf/jumpblues.jpg",
+            stream: "http://213.141.131.10:8000/jumpblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Louisiana / Swamp / New Orleans Blues",
+            logo: "http://radcap.ru/stylegraf/swampblues.jpg",
+            stream: "http://213.141.131.10:8000/louisianablues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Piano Blues / Boogie-Woogie",
+            logo: "http://radcap.ru/stylegraf/pianoblues.jpg",
+            stream: "http://79.111.14.76:8000/pianoblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Pop Soul",
+            logo: "http://radcap.ru/stylegraf/popsoul.jpg",
+            stream: "http://213.141.131.10:8000/popsoul",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Rhythm And Blues / R'n'b",
+            logo: "http://radcap.ru/stylegraf/rnb5.jpg",
+            stream: "http://79.120.77.11:8000/rnb",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Slide Guitar",
+            logo: "http://radcap.ru/stylegraf/slideguitar.jpg",
+            stream: "http://213.141.131.10:8000/slideguitar",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Soul / Neo Soul Music",
+            logo: "http://radcap.ru/stylegraf/soul2.jpg",
+            stream: "http://79.120.39.202:8000/soul",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Soul Blues",
+            logo: "http://radcap.ru/stylegraf/soulblues.jpg",
+            stream: "http://79.111.14.76:8000/soulblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Texas Blues",
+            logo: "http://radcap.ru/stylegraf/texasblues.jpg",
+            stream: "http://79.111.14.76:8000/texasblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "West Coast Blues",
+            logo: "http://radcap.ru/stylegraf/westcoastblues.jpg",
+            stream: "http://79.120.12.130:8000/westcoastblues",
+            genre: "BLUES / SOUL / FUNK / R&amp;B"
+        },
+        {
+            title: "Alternative / Insurgent Country Music",
+            logo: "http://radcap.ru/stylegraf/altcountry3.jpg",
+            stream: "http://79.111.119.111:8000/altcountry",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Bluegrass (country Music)",
+            logo: "http://radcap.ru/stylegraf/bluegrass2.jpg",
+            stream: "http://79.111.14.76:8000/bluegrass",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Country Music",
+            logo: "http://radcap.ru/stylegraf/country.jpg",
+            stream: "http://79.120.77.11:8000/country",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Country Pop Music",
+            logo: "http://radcap.ru/stylegraf/countrypop1.jpg",
+            stream: "http://79.111.119.111:8000/countrypop",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Honky-Tonk / Honkatonk / Honkey Tonk",
+            logo: "http://radcap.ru/stylegraf/honkytonk1.jpg",
+            stream: "http://213.141.131.10:8000/honkytonk",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Western Swing Music",
+            logo: "http://radcap.ru/stylegraf/westernswing1.jpg",
+            stream: "http://79.120.12.130:8000/westernswing",
+            genre: "COUNTRY MUSIC"
+        },
+        {
+            title: "Acid / Club / Groove Jazz",
+            logo: "http://radcap.ru/stylegraf/acidjazz4.jpg",
+            stream: "http://79.111.14.76:8000/acidjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Avant-Garde Jazz / Free Improvisation",
+            logo: "http://radcap.ru/stylegraf/avantjazz.jpg",
+            stream: "http://79.111.119.111:8000/avantgardejazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Bebop / Be-Bop / Bop",
+            logo: "http://radcap.ru/stylegraf/bebop1.jpg",
+            stream: "http://79.120.12.130:8000/bebop",
+            genre: "JAZZ"
+        },
+        {
+            title: "Big Band / Jazz Orchestra",
+            logo: "http://radcap.ru/stylegraf/bigband.jpg",
+            stream: "http://79.120.39.202:8000/bigband",
+            genre: "JAZZ"
+        },
+        {
+            title: "Bossa Nova (brazilian Music)",
+            logo: "http://radcap.ru/stylegraf/bossanova5.jpg",
+            stream: "http://79.111.14.76:8000/bossanova",
+            genre: "JAZZ"
+        },
+        {
+            title: "Brazilian Jazz",
+            logo: "http://radcap.ru/stylegraf/brazilianjazz.jpg",
+            stream: "http://79.120.12.130:8000/brazilianjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Chamber Jazz",
+            logo: "http://radcap.ru/stylegraf/chamberjazz.jpg",
+            stream: "http://79.120.39.202:8000/chamberjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Contemporary Jazz",
+            logo: "http://radcap.ru/stylegraf/contemporaryjazz2.jpg",
+            stream: "http://79.111.119.111:8000/contemporaryjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Cool / West Coast Jazz",
+            logo: "http://radcap.ru/stylegraf/cooljazz1.jpg",
+            stream: "http://79.120.39.202:8000/cooljazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Crossover Jazz",
+            logo: "http://radcap.ru/stylegraf/crossoverjazz.jpg",
+            stream: "http://213.141.131.10:8000/crossoverjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Dark / Doom / Noir / Funeral / Ambient Jazz",
+            logo: "http://radcap.ru/stylegraf/darkjazz5.jpg",
+            stream: "http://79.120.39.202:8000/darkjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Dixieland / New Orleans / Traditional / Hot Jazz",
+            logo: "http://radcap.ru/stylegraf/dixieland.jpg",
+            stream: "http://79.120.39.202:8000/dixieland",
+            genre: "JAZZ"
+        },
+        {
+            title: "Ethno / World Jazz",
+            logo: "http://radcap.ru/stylegraf/ethnojazz.jpg",
+            stream: "http://79.120.39.202:8000/ethnojazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Free Funk",
+            logo: "http://radcap.ru/stylegraf/freefunk.jpg",
+            stream: "http://79.120.12.130:8000/freefunk",
+            genre: "JAZZ"
+        },
+        {
+            title: "Free Jazz",
+            logo: "http://radcap.ru/stylegraf/freejazz1.jpg",
+            stream: "http://79.111.14.76:8000/freejazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Guitar Jazz",
+            logo: "http://radcap.ru/stylegraf/guitarjazz.jpg",
+            stream: "http://79.120.77.11:8000/guitarjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Hard Bop",
+            logo: "http://radcap.ru/stylegraf/hardbop2.jpg",
+            stream: "http://79.111.14.76:8000/hardbop",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz",
+            logo: "http://radcap.ru/stylegraf/jazz.jpg",
+            stream: "http://79.120.77.11:8000/jazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz Funk",
+            logo: "http://radcap.ru/stylegraf/jazzfunk.jpg",
+            stream: "http://79.120.39.202:8000/jazzfunk",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz Fusion",
+            logo: "http://radcap.ru/stylegraf/jazzfusion3.jpg",
+            stream: "http://79.111.119.111:8000/jazzfusion",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz Manouche / Gypsy Jazz / Gypsy Swing",
+            logo: "http://radcap.ru/stylegraf/manouche.jpg",
+            stream: "http://79.120.77.11:8000/manouche",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz Pop",
+            logo: "http://radcap.ru/stylegraf/jazzpop1.jpg",
+            stream: "http://79.120.39.202:8000/jazzpop",
+            genre: "JAZZ"
+        },
+        {
+            title: "Jazz Trumpet",
+            logo: "http://radcap.ru/stylegraf/trumpet.jpg",
+            stream: "http://213.141.131.10:8000/trumpetjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Latin / Afro-Cuban Jazz",
+            logo: "http://radcap.ru/stylegraf/latinjazz2.jpg",
+            stream: "http://79.111.119.111:8000/latinjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Mainstream Jazz",
+            logo: "http://radcap.ru/stylegraf/mainstreamjazz2.jpg",
+            stream: "http://79.111.14.76:8000/mainstreamjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Modal Jazz",
+            logo: "http://radcap.ru/stylegraf/modal.jpg",
+            stream: "http://213.141.131.10:8000/modaljazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Modern Creative",
+            logo: "http://radcap.ru/stylegraf/mcreative.jpg",
+            stream: "http://79.120.77.11:8000/mcreative",
+            genre: "JAZZ"
+        },
+        {
+            title: "Nu Jazz / Future Jazz",
+            logo: "http://radcap.ru/stylegraf/nujazz.jpg",
+            stream: "http://79.111.14.76:8000/nujazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Piano Jazz / Stride / Ragtime",
+            logo: "http://radcap.ru/stylegraf/pianojazz.jpg",
+            stream: "http://79.111.119.111:8000/pianojazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Post Bop (jazz Music)",
+            logo: "http://radcap.ru/stylegraf/postbop.jpg",
+            stream: "http://79.111.14.76:8000/postbop",
+            genre: "JAZZ"
+        },
+        {
+            title: "Smooth / Soft Jazz",
+            logo: "http://radcap.ru/stylegraf/smoothjazz4.jpg",
+            stream: "http://79.120.39.202:8000/smoothjazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Soul Jazz",
+            logo: "http://radcap.ru/stylegraf/souljazz6.jpg",
+            stream: "http://79.111.14.76:8000/souljazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Straight-Ahead Jazz",
+            logo: "http://radcap.ru/stylegraf/straightahead.jpg",
+            stream: "http://79.120.12.130:8000/straightahead",
+            genre: "JAZZ"
+        },
+        {
+            title: "Style &amp; Sound Ecm Records",
+            logo: "http://radcap.ru/stylegraf/ecm9.jpg",
+            stream: "http://213.141.131.10:8000/ecmrecords",
+            genre: "JAZZ"
+        },
+        {
+            title: "Swing / Neo-Swing Music",
+            logo: "http://radcap.ru/stylegraf/swing3.jpg",
+            stream: "http://79.120.39.202:8000/swing",
+            genre: "JAZZ"
+        },
+        {
+            title: "Third Stream Jazz",
+            logo: "http://radcap.ru/stylegraf/thirdstream.jpg",
+            stream: "http://213.141.131.10:8000/thirdstream",
+            genre: "JAZZ"
+        },
+        {
+            title: "Vibraphone In Jazz",
+            logo: "http://radcap.ru/stylegraf/vibraphonejazz1.jpg",
+            stream: "http://213.141.131.10:8000/vibraphone",
+            genre: "JAZZ"
+        },
+        {
+            title: "Vocal Jazz / Jazz Singing",
+            logo: "http://radcap.ru/stylegraf/vocaljazz2.jpg",
+            stream: "http://79.120.39.202:8000/vocaljazz",
+            genre: "JAZZ"
+        },
+        {
+            title: "Arabic Pop Music",
+            logo: "http://radcap.ru/stylegraf/arabicpop3.jpg",
+            stream: "http://79.120.39.202:8000/arabicpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Bulgarian Pop-Folk / Ethnopop / Chalga",
+            logo: "http://radcap.ru/stylegraf/chalga2.jpg",
+            stream: "http://213.141.131.10:8000/chalga",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "C-Pop (chinese Popular Music)",
+            logo: "http://radcap.ru/stylegraf/cpop1.jpg",
+            stream: "http://213.141.131.10:8000/cpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Cantopop / Hk-Pop",
+            logo: "http://radcap.ru/stylegraf/cantopop.jpg",
+            stream: "http://79.120.12.130:8000/cantopop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Classical Crossover",
+            logo: "http://radcap.ru/stylegraf/classcross1.jpg",
+            stream: "http://79.120.77.11:8000/classcross",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Dance Pop",
+            logo: "http://radcap.ru/stylegraf/dancepop2.jpg",
+            stream: "http://79.120.77.11:8000/dancepop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Disco",
+            logo: "http://radcap.ru/stylegraf/disco4.jpg",
+            stream: "http://79.120.77.11:8000/disco",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Euro Disco",
+            logo: "http://radcap.ru/stylegraf/eurodisco.jpg",
+            stream: "http://79.111.119.111:8000/eurodisco",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Eurobeat / Hi-Nrg",
+            logo: "http://radcap.ru/stylegraf/eurobeat.jpg",
+            stream: "http://79.120.39.202:8000/eurobeat",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Eurodance / Euro-Nrg",
+            logo: "http://radcap.ru/stylegraf/eurodance.jpg",
+            stream: "http://79.120.39.202:8000/eurodance",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Folk Pop",
+            logo: "http://radcap.ru/stylegraf/folkpop.jpg",
+            stream: "http://213.141.131.10:8000/folkpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "French / Nouvelle Chanson",
+            logo: "http://radcap.ru/stylegraf/frenchchanson1.jpg",
+            stream: "http://79.111.14.76:8000/frenchchanson",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "French Pop Music",
+            logo: "http://radcap.ru/stylegraf/frenchpop3.jpg",
+            stream: "http://79.120.12.130:8000/frenchpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Italo Disco",
+            logo: "http://radcap.ru/stylegraf/italodisco3.jpg",
+            stream: "http://79.111.119.111:8000/italodisco",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Italian Popular Music",
+            logo: "http://radcap.ru/stylegraf/italopop.jpg",
+            stream: "http://213.141.131.10:8000/italopop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "J-Pop (japanese Popular Music)",
+            logo: "http://radcap.ru/stylegraf/jpop1.jpg",
+            stream: "http://79.111.119.111:8000/jpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "K-Pop (korean Popular Music)",
+            logo: "http://radcap.ru/stylegraf/kpop.jpg",
+            stream: "http://79.111.119.111:8000/kpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Latin Popular Music",
+            logo: "http://radcap.ru/stylegraf/latinpop7.jpg",
+            stream: "http://79.111.119.111:8000/latinpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Manele / Romanian Pop-Folk / Ethnic",
+            logo: "http://radcap.ru/stylegraf/manele1.jpg",
+            stream: "http://213.141.131.10:8000/manele",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Nu Disco",
+            logo: "http://radcap.ru/stylegraf/nudisco3.jpg",
+            stream: "http://79.111.119.111:8000/nudisco",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Pop Ballads",
+            logo: "http://radcap.ru/stylegraf/popballads2.jpg",
+            stream: "http://79.120.77.11:8000/popballads",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Pop (popular) Music",
+            logo: "http://radcap.ru/stylegraf/pop4.jpg",
+            stream: "http://79.120.77.11:8000/pop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Reggaeton / Cubaton / Salsaton / Latino...",
+            logo: "http://radcap.ru/stylegraf/reggaeton1.jpg",
+            stream: "http://213.141.131.10:8000/reggaeton",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Pop Music Of The Ussr",
+            logo: "http://radcap.ru/stylegraf/ussr2.jpg",
+            stream: "http://79.120.77.11:8000/ussr",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Russian Pop Music 1980-1990's",
+            logo: "http://radcap.ru/stylegraf/80ru5.jpg",
+            stream: "http://79.120.77.11:8000/80ru",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Russian Pop (popular) Music",
+            logo: "http://radcap.ru/stylegraf/popru2.jpg",
+            stream: "http://79.120.77.11:8000/popru",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Schlager Music",
+            logo: "http://radcap.ru/stylegraf/schlager.jpg",
+            stream: "http://79.111.119.111:8000/schlager",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Traditional Pop / Classic Pop",
+            logo: "http://radcap.ru/stylegraf/traditionalpop1.jpg",
+            stream: "http://213.141.131.10:8000/tradpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Turkish Pop / Pop Rock",
+            logo: "http://radcap.ru/stylegraf/turkishpop.jpg",
+            stream: "http://213.141.131.10:8000/turkishpop",
+            genre: "POP MUSIC"
+        },
+        {
+            title: "Acid Rock",
+            logo: "http://radcap.ru/stylegraf/acidrock1.jpg",
+            stream: "http://213.141.131.10:8000/acidrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Alternative / Alt Rock",
+            logo: "http://radcap.ru/stylegraf/altrock.jpg",
+            stream: "http://79.120.39.202:8000/altrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Aor (album Oriented Rock) / Melodic Hard Rock",
+            logo: "http://radcap.ru/stylegraf/aor.jpg",
+            stream: "http://79.111.14.76:8000/aor",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Art Rock",
+            logo: "http://radcap.ru/stylegraf/artrock2.jpg",
+            stream: "http://79.120.39.202:8000/artrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Avant-Prog / Rock In Opposition (rio) / Canterbury Scene / Zeuhl",
+            logo: "http://radcap.ru/stylegraf/avantprog2.jpg",
+            stream: "http://79.111.119.111:8000/avantprog",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Avant Rock / Experimental",
+            logo: "http://radcap.ru/stylegraf/avantrock.jpg",
+            stream: "http://213.141.131.10:8000/avantrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Blues Rock",
+            logo: "http://radcap.ru/stylegraf/bluesrock1.jpg",
+            stream: "http://79.120.39.202:8000/bluesrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Britpop / Post Britpop",
+            logo: "http://radcap.ru/stylegraf/britpop2.jpg",
+            stream: "http://79.120.39.202:8000/britpop",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Celtic Rock",
+            logo: "http://radcap.ru/stylegraf/celticrock.jpg",
+            stream: "http://79.120.12.130:8000/celticrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Chamber / Baroque / Pop / Rock",
+            logo: "http://radcap.ru/stylegraf/chamberpop1.jpg",
+            stream: "http://79.111.14.76:8000/chamberpop",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Christian Rock",
+            logo: "http://radcap.ru/stylegraf/christianrock.jpg",
+            stream: "http://213.141.131.10:8000/christianrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Classic Rock / Rock",
+            logo: "http://radcap.ru/stylegraf/classicrock.jpg",
+            stream: "http://79.120.77.11:8000/rock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Country Rock",
+            logo: "http://radcap.ru/stylegraf/countryrock3.jpg",
+            stream: "http://79.111.119.111:8000/countryrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Crossover Prog",
+            logo: "http://radcap.ru/stylegraf/crossoverprog.jpg",
+            stream: "http://79.111.14.76:8000/crossoverprog",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Dance / Disco / Funk Punk",
+            logo: "http://radcap.ru/stylegraf/dancepunk.jpg",
+            stream: "http://213.141.131.10:8000/dancepunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Dark Cabaret",
+            logo: "http://radcap.ru/stylegraf/darkcabaret1.jpg",
+            stream: "http://79.111.119.111:8000/darkcabaret",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Dark Wave",
+            logo: "http://radcap.ru/stylegraf/darkwave5.jpg",
+            stream: "http://79.111.14.76:8000/darkwave",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Death Rock / Deathrock",
+            logo: "http://radcap.ru/stylegraf/deathrock.jpg",
+            stream: "http://79.120.12.130:8000/deathrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Dream Pop",
+            logo: "http://radcap.ru/stylegraf/dreampop5.jpg",
+            stream: "http://79.111.14.76:8000/dreampop",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Eclectic Progressive Rock",
+            logo: "http://radcap.ru/stylegraf/eclecticprog.jpg",
+            stream: "http://79.111.14.76:8000/eclecticprog",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Ethereal Wave / Goth / Darkwave",
+            logo: "http://radcap.ru/stylegraf/ethereal1.jpg",
+            stream: "http://213.141.131.10:8000/ethereal",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Folk / Celtic / Gypsy Punk",
+            logo: "http://radcap.ru/stylegraf/folkpunk.jpg",
+            stream: "http://213.141.131.10:8000/folkpunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Folk Rock",
+            logo: "http://radcap.ru/stylegraf/folkrock3.jpg",
+            stream: "http://79.111.14.76:8000/folkrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Funk Rock / Metal",
+            logo: "http://radcap.ru/stylegraf/funkmetal.jpg",
+            stream: "http://213.141.131.10:8000/funkrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Garage Punk",
+            logo: "http://radcap.ru/stylegraf/garagepunk.jpg",
+            stream: "http://79.120.12.130:8000/garagepunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Garage Rock / Garage Revival",
+            logo: "http://radcap.ru/stylegraf/garagerock.jpg",
+            stream: "http://79.111.119.111:8000/garagerock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Glam Rock / Metal",
+            logo: "http://radcap.ru/stylegraf/glamrock1.jpg",
+            stream: "http://79.120.39.202:8000/glam",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Gothic / Goth Rock",
+            logo: "http://radcap.ru/stylegraf/gothicrock7.jpg",
+            stream: "http://79.111.14.76:8000/gothicrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Grunge / Seattle Sound",
+            logo: "http://radcap.ru/stylegraf/grunge.jpg",
+            stream: "http://79.120.39.202:8000/grunge",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Hard / Heavy Rock",
+            logo: "http://radcap.ru/stylegraf/hardrock.jpg",
+            stream: "http://79.120.77.11:8000/hardrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Heavy / Hard Psychedelic",
+            logo: "http://radcap.ru/stylegraf/heavypsych.jpg",
+            stream: "http://79.120.39.202:8000/heavypsych",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Heavy / Hard Prog",
+            logo: "http://radcap.ru/stylegraf/heavyprog.jpg",
+            stream: "http://79.111.14.76:8000/heavyprog",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Horror Punk",
+            logo: "http://radcap.ru/stylegraf/horrorpunk.jpg",
+            stream: "http://79.120.77.11:8000/horrorpunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Indie / Twee Pop",
+            logo: "http://radcap.ru/stylegraf/twee.jpg",
+            stream: "http://79.111.119.111:8000/indiepop",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Indie Folk",
+            logo: "http://radcap.ru/stylegraf/indiefolk2.jpg",
+            stream: "http://79.111.14.76:8000/indiefolk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Indie Rock",
+            logo: "http://radcap.ru/stylegraf/indierock2.jpg",
+            stream: "http://79.120.39.202:8000/indierock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Industrial Rock",
+            logo: "http://radcap.ru/stylegraf/industrialrock1.jpg",
+            stream: "http://79.120.77.11:8000/industrialrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Instrumental Rock",
+            logo: "http://radcap.ru/stylegraf/instrumentalrock.jpg",
+            stream: "http://79.120.39.202:8000/instrumentalrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "J-Rock (japanese Rock Music)",
+            logo: "http://radcap.ru/stylegraf/jrock1.jpg",
+            stream: "http://79.111.119.111:8000/jrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Jam Band",
+            logo: "http://radcap.ru/stylegraf/jamband.jpg",
+            stream: "http://79.120.12.130:8000/jamband",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Jazz Rock",
+            logo: "http://radcap.ru/stylegraf/jazzrock.jpg",
+            stream: "http://79.111.119.111:8000/jazzrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Krautrock / Kosmische Musik",
+            logo: "http://radcap.ru/stylegraf/krautrock.jpg",
+            stream: "http://79.111.119.111:8000/krautrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Math Rock",
+            logo: "http://radcap.ru/stylegraf/mathrock1.jpg",
+            stream: "http://79.120.39.202:8000/mathrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Neo-Progressive Rock",
+            logo: "http://radcap.ru/stylegraf/neoprogrock1.jpg",
+            stream: "http://79.111.119.111:8000/neoprogrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "New Wave / Cold Wave",
+            logo: "http://radcap.ru/stylegraf/newwave.jpg",
+            stream: "http://79.120.39.202:8000/newwave",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Noise Rock / Pop",
+            logo: "http://radcap.ru/stylegraf/noiserock1.jpg",
+            stream: "http://79.120.39.202:8000/noiserock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Oi! / Street Punk",
+            logo: "http://radcap.ru/stylegraf/oi.jpg",
+            stream: "http://79.111.119.111:8000/oistreetpunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Piano Rock / Pop",
+            logo: "http://radcap.ru/stylegraf/pianorock.jpg",
+            stream: "http://79.111.14.76:8000/pianorock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Pop Punk",
+            logo: "http://radcap.ru/stylegraf/poppunk1.jpg",
+            stream: "http://79.111.14.76:8000/poppunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Pop Rock / Soft Rock / Power Pop",
+            logo: "http://radcap.ru/stylegraf/poprock4.jpg",
+            stream: "http://79.120.77.11:8000/poprock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Post Grunge",
+            logo: "http://radcap.ru/stylegraf/postgrunge.jpg",
+            stream: "http://79.111.119.111:8000/postgrunge",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Post Punk / No Wave",
+            logo: "http://radcap.ru/stylegraf/postpunk.jpg",
+            stream: "http://79.120.39.202:8000/postpunk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Post Rock",
+            logo: "http://radcap.ru/stylegraf/postrock4.jpg",
+            stream: "http://79.111.14.76:8000/postrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Progressive Folk",
+            logo: "http://radcap.ru/stylegraf/progfolk.jpg",
+            stream: "http://213.141.131.10:8000/progfolk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Progressive Rock",
+            logo: "http://radcap.ru/stylegraf/progrock2.jpg",
+            stream: "http://79.111.119.111:8000/progressiverock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Psychedelic Folk",
+            logo: "http://radcap.ru/stylegraf/psychfolk.jpg",
+            stream: "http://213.141.131.10:8000/psychfolk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Psychedelic Rock",
+            logo: "http://radcap.ru/stylegraf/psychedelicrock2.jpg",
+            stream: "http://79.111.119.111:8000/psychedelicrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Psychobilly / Horrorbilly",
+            logo: "http://radcap.ru/stylegraf/psychobilly.jpg",
+            stream: "http://79.111.119.111:8000/psychobilly",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Punk Rock",
+            logo: "http://radcap.ru/stylegraf/punkrock.jpg",
+            stream: "http://79.120.77.11:8000/punk",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "ROCK'n'ROLL",
+            logo: "http://radcap.ru/stylegraf/rocknroll4.jpg",
+            stream: "http://79.120.77.11:8000/rockroll",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Rock / Metal Ballads",
+            logo: "http://radcap.ru/stylegraf/rockballads3.jpg",
+            stream: "http://79.120.77.11:8000/rockballads",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Rockabilly",
+            logo: "http://radcap.ru/stylegraf/rockabilly3.jpg",
+            stream: "http://79.111.14.76:8000/rockabilly",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Roots Rock",
+            logo: "http://radcap.ru/stylegraf/rootsrock.jpg",
+            stream: "http://79.120.12.130:8000/rootsrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Russian Folk Rock",
+            logo: "http://radcap.ru/stylegraf/folkrockru4.jpg",
+            stream: "http://79.111.14.76:8000/folkrockru",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Russian Punk Rock",
+            logo: "http://radcap.ru/stylegraf/punkrockru2.jpg",
+            stream: "http://79.120.77.11:8000/punkru",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Russian Rock / Bard Rock",
+            logo: "http://radcap.ru/stylegraf/rockru4.jpg",
+            stream: "http://79.120.77.11:8000/rockru",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Shoegazing / Shoegaze",
+            logo: "http://radcap.ru/stylegraf/shoegazing3.jpg",
+            stream: "http://79.111.119.111:8000/shoegazing",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Slowcore / Sadcore",
+            logo: "http://radcap.ru/stylegraf/slowcore1.jpg",
+            stream: "http://213.141.131.10:8000/slowcore",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Southern Rock / Metal",
+            logo: "http://radcap.ru/stylegraf/southernrock.jpg",
+            stream: "http://79.111.14.76:8000/southernrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Space Rock",
+            logo: "http://radcap.ru/stylegraf/spacerock2.jpg",
+            stream: "http://79.111.119.111:8000/spacerock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Stoner Rock",
+            logo: "http://radcap.ru/stylegraf/stonerrock.jpg",
+            stream: "http://79.111.119.111:8000/stonerrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Surf Rock / Pop / Music",
+            logo: "http://radcap.ru/stylegraf/surfrock.jpg",
+            stream: "http://79.111.119.111:8000/surfrock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Symphonic Rock",
+            logo: "http://radcap.ru/stylegraf/symphrock.jpg",
+            stream: "http://79.120.39.202:8000/symphorock",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Twist",
+            logo: "http://radcap.ru/stylegraf/twist2.jpg",
+            stream: "http://79.111.119.111:8000/twist",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Visual / Nagoya / Oshare / Angura Kei",
+            logo: "http://radcap.ru/stylegraf/visualkei.jpg",
+            stream: "http://79.120.12.130:8000/visualkei",
+            genre: "ROCK MUSIC"
+        },
+        {
+            title: "Dancehall / Raggamuffin",
+            logo: "http://radcap.ru/stylegraf/dancehall2.jpg",
+            stream: "http://79.111.14.76:8000/dancehall",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Dub Music",
+            logo: "http://radcap.ru/stylegraf/dub1.jpg",
+            stream: "http://79.111.14.76:8000/dub",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Reggae",
+            logo: "http://radcap.ru/stylegraf/reggae2.jpg",
+            stream: "http://79.120.39.202:8000/reggae",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Rocksteady / Lovers Rock",
+            logo: "http://radcap.ru/stylegraf/rocksteady.jpg",
+            stream: "http://79.120.39.202:8000/rocksteady",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Roots Reggae",
+            logo: "http://radcap.ru/stylegraf/rootsreggae.jpg",
+            stream: "http://79.111.119.111:8000/rootsreggae",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Ska / Ska Revival",
+            logo: "http://radcap.ru/stylegraf/ska3.jpg",
+            stream: "http://79.111.119.111:8000/ska",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Ska Punk / Core / Two Tone",
+            logo: "http://radcap.ru/stylegraf/skapunk1.jpg",
+            stream: "http://79.111.119.111:8000/skapunk",
+            genre: "REGGAE / SKA"
+        },
+        {
+            title: "Atmospheric / Ambient Black Metal",
+            logo: "http://radcap.ru/stylegraf/abm4.jpg",
+            stream: "http://79.120.39.202:8000/aabmds",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Alternative / Alt Metal",
+            logo: "http://radcap.ru/stylegraf/altmetal.jpg",
+            stream: "http://79.120.77.11:8000/altmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Atmospheric Doom Metal",
+            logo: "http://radcap.ru/stylegraf/atmosdoom.jpg",
+            stream: "http://213.141.131.10:8000/atmosphericdoom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Avant-Garde Black Metal",
+            logo: "http://radcap.ru/stylegraf/avantgardeblack1.jpg",
+            stream: "http://79.120.39.202:8000/avantblackmet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Avant-Garde / Experimental Metal",
+            logo: "http://radcap.ru/stylegraf/avantmetal4.jpg",
+            stream: "http://79.111.14.76:8000/avantgardemetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Black / Blackened Death Metal",
+            logo: "http://radcap.ru/stylegraf/blackdeath2.jpg",
+            stream: "http://79.111.14.76:8000/blackdeath",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Black / Blackened Doom Metal",
+            logo: "http://radcap.ru/stylegraf/blackdoom.jpg",
+            stream: "http://79.120.77.11:8000/blackdoom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Black Metal / Proto / True / Raw",
+            logo: "http://radcap.ru/stylegraf/blackmetal.jpg",
+            stream: "http://79.120.77.11:8000/blackmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Brutal Death Metal / Ny / Technical / Slamming",
+            logo: "http://radcap.ru/stylegraf/brutal1.jpg",
+            stream: "http://79.111.119.111:8000/brutaldeathmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Celtic Metal",
+            logo: "http://radcap.ru/stylegraf/celticmetal.jpg",
+            stream: "http://79.120.12.130:8000/celticmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Crossover Thrash",
+            logo: "http://radcap.ru/stylegraf/crossoverthrash1.jpg",
+            stream: "http://213.141.131.10:8000/crossoverthrash",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Dark Metal",
+            logo: "http://radcap.ru/stylegraf/darkmetal2.jpg",
+            stream: "http://79.111.119.111:8000/darkmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Death Doom Metal",
+            logo: "http://radcap.ru/stylegraf/deathdoom3.jpg",
+            stream: "http://79.120.39.202:8000/deathdoom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Death Metal",
+            logo: "http://radcap.ru/stylegraf/deathmetal3.jpg",
+            stream: "http://79.120.77.11:8000/deathmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Death 'n' Roll",
+            logo: "http://radcap.ru/stylegraf/deathnroll.jpg",
+            stream: "http://79.120.39.202:8000/deathnroll",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Depressive Suicidal Black Metal / Dsbm",
+            logo: "http://radcap.ru/stylegraf/depressive1.jpg",
+            stream: "http://79.111.119.111:8000/dsbm",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Doom / Epic Doom Metal",
+            logo: "http://radcap.ru/stylegraf/doom2.jpg",
+            stream: "http://79.111.14.76:8000/doom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Drone / Drone Doom Metal",
+            logo: "http://radcap.ru/stylegraf/dronemetal1.jpg",
+            stream: "http://79.120.39.202:8000/dronemetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Epic Metal",
+            logo: "http://radcap.ru/stylegraf/epicmetal.jpg",
+            stream: "http://79.111.119.111:8000/epicmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Female Vocal In Metal",
+            logo: "http://radcap.ru/stylegraf/femalemetal.jpg",
+            stream: "http://79.111.14.76:8000/femalemetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Folk Black Metal",
+            logo: "http://radcap.ru/stylegraf/folkblackmet.jpg",
+            stream: "http://79.120.12.130:8000/folkblackmet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Folk Death Metal",
+            logo: "http://radcap.ru/stylegraf/folkdeathmet.jpg",
+            stream: "http://79.120.12.130:8000/folkdeathmet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Folk Metal",
+            logo: "http://radcap.ru/stylegraf/folkmetal1.jpg",
+            stream: "http://79.120.39.202:8000/folkmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Funeral Doom Metal",
+            logo: "http://radcap.ru/stylegraf/fdm2.jpg",
+            stream: "http://79.120.77.11:8000/funeraldoom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Gothic Black Metal",
+            logo: "http://radcap.ru/stylegraf/gothblackmet.jpg",
+            stream: "http://79.120.39.202:8000/gothblackmet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Gothic Death Metal",
+            logo: "http://radcap.ru/stylegraf/gothdeathmet.jpg",
+            stream: "http://79.120.39.202:8000/gothdeathmet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Gothic Doom Metal",
+            logo: "http://radcap.ru/stylegraf/gothicdoom.jpg",
+            stream: "http://79.120.39.202:8000/gothdoommet",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Gothic / Goth Metal",
+            logo: "http://radcap.ru/stylegraf/gothicmetal11.jpg",
+            stream: "http://79.120.77.11:8000/gothicmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Groove Metal",
+            logo: "http://radcap.ru/stylegraf/groovemetal5.jpg",
+            stream: "http://79.120.39.202:8000/groovemetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Heavy Metal",
+            logo: "http://radcap.ru/stylegraf/heavymetal.jpg",
+            stream: "http://79.111.14.76:8000/heavymetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Heavy Power Metal",
+            logo: "http://radcap.ru/stylegraf/heavypowermetal.jpg",
+            stream: "http://79.120.12.130:8000/heavypowermetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Industrial / Cyber Metal",
+            logo: "http://radcap.ru/stylegraf/industrialmetal5.jpg",
+            stream: "http://79.120.39.202:8000/industrialmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Instrumental Metal",
+            logo: "http://radcap.ru/stylegraf/instrmetal2.jpg",
+            stream: "http://79.111.119.111:8000/instrumentalmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Jazz / Fusion Metal",
+            logo: "http://radcap.ru/stylegraf/jazzmetal.jpg",
+            stream: "http://213.141.131.10:8000/jazzmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Math Metal / Djent",
+            logo: "http://radcap.ru/stylegraf/mathmetal7.jpg",
+            stream: "http://79.120.39.202:8000/mathmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Medieval Metal / Rock",
+            logo: "http://radcap.ru/stylegraf/medievalmetal.jpg",
+            stream: "http://213.141.131.10:8000/medievalmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Melodic Black Metal",
+            logo: "http://radcap.ru/stylegraf/mbm.jpg",
+            stream: "http://79.111.119.111:8000/melodicblackmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Melodic Death Metal",
+            logo: "http://radcap.ru/stylegraf/mdm.jpg",
+            stream: "http://79.120.77.11:8000/melodicdeath",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Melodic Doom / Doom Death Metal",
+            logo: "http://radcap.ru/stylegraf/melodicdoom.jpg",
+            stream: "http://79.120.12.130:8000/melodicdoom",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Melodic Heavy Metal",
+            logo: "http://radcap.ru/stylegraf/melodicheavy1.jpg",
+            stream: "http://79.111.119.111:8000/melodicheavy",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Melodic Power Metal",
+            logo: "http://radcap.ru/stylegraf/melodicpower.jpg",
+            stream: "http://79.111.119.111:8000/melodicpower",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Neue Deutsche Härte",
+            logo: "http://radcap.ru/stylegraf/ndh.jpg",
+            stream: "http://213.141.131.10:8000/ndh",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Neoclassical Metal",
+            logo: "http://radcap.ru/stylegraf/neoclassmet.jpg",
+            stream: "http://79.111.119.111:8000/neoclassicalmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Nu / Nü / Aggro Metal",
+            logo: "http://radcap.ru/stylegraf/numetal8.jpg",
+            stream: "http://79.111.14.76:8000/numetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Nwobhm (new Wave Of British Heavy Metal)",
+            logo: "http://radcap.ru/stylegraf/nwobhm.jpg",
+            stream: "http://79.120.12.130:8000/nwobhm",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Oriental Metal",
+            logo: "http://radcap.ru/stylegraf/orientalmetal2.jpg",
+            stream: "http://79.111.119.111:8000/orientalmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Pagan Metal",
+            logo: "http://radcap.ru/stylegraf/pagan.jpg",
+            stream: "http://79.111.119.111:8000/paganmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Progressive Black / Post-Black / Blackgaze",
+            logo: "http://radcap.ru/stylegraf/postblack.jpg",
+            stream: "http://79.111.14.76:8000/postblack",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Post / Instro / Art Metal",
+            logo: "http://radcap.ru/stylegraf/postmetal5.jpg",
+            stream: "http://79.120.39.202:8000/postmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Power Metal",
+            logo: "http://radcap.ru/stylegraf/powermetal.jpg",
+            stream: "http://79.120.77.11:8000/powermetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Progressive Death Metal",
+            logo: "http://radcap.ru/stylegraf/progdeath.jpg",
+            stream: "http://79.111.119.111:8000/progdeath",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Progressive Heavy Metal",
+            logo: "http://radcap.ru/stylegraf/progheavymet.jpg",
+            stream: "http://213.141.131.10:8000/progheavy",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Progressive / Prog Metal",
+            logo: "http://radcap.ru/stylegraf/progmetal1.jpg",
+            stream: "http://79.120.77.11:8000/progmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Progressive Power Metal",
+            logo: "http://radcap.ru/stylegraf/progpowermetal.jpg",
+            stream: "http://79.111.119.111:8000/progpowermetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Sludge Metal / Sludgecore / Sludge Doom",
+            logo: "http://radcap.ru/stylegraf/sludgemetal.jpg",
+            stream: "http://79.120.77.11:8000/sludgemetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Speed Heavy",
+            logo: "http://radcap.ru/stylegraf/speedheavy.jpg",
+            stream: "http://213.141.131.10:8000/speedheavy",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Speed Metal",
+            logo: "http://radcap.ru/stylegraf/speedmetal.jpg",
+            stream: "http://79.111.119.111:8000/speedmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Stoner / Stoner Doom Metal",
+            logo: "http://radcap.ru/stylegraf/stonermetal1.jpg",
+            stream: "http://79.120.77.11:8000/stonermetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Symphonic Black Metal / Symphoblack",
+            logo: "http://radcap.ru/stylegraf/symphoblack1.jpg",
+            stream: "http://79.111.119.111:8000/symphonicblackmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Symphonic Death Metal / Symphodeath",
+            logo: "http://radcap.ru/stylegraf/symphodeathmet.jpg",
+            stream: "http://213.141.131.10:8000/symphodeath",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Symphonic Gothic Metal",
+            logo: "http://radcap.ru/stylegraf/symphogothmet2.jpg",
+            stream: "http://213.141.131.10:8000/symphogoth",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Symphonic Metal / Symphometal",
+            logo: "http://radcap.ru/stylegraf/symphonicmetal4.jpg",
+            stream: "http://79.120.77.11:8000/symphometal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Symphonic Power Metal",
+            logo: "http://radcap.ru/stylegraf/symphopower1.jpg",
+            stream: "http://213.141.131.10:8000/symphopower",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Technical Death Metal / Techdeath",
+            logo: "http://radcap.ru/stylegraf/tdm3.jpg",
+            stream: "http://79.120.77.11:8000/techdeathmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Thrash Black Metal",
+            logo: "http://radcap.ru/stylegraf/thrashblack.jpg",
+            stream: "http://213.141.131.10:8000/thrashblack",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Thrash Death Metal",
+            logo: "http://radcap.ru/stylegraf/thrashdeath1.jpg",
+            stream: "http://79.120.12.130:8000/thrashdeath",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Thrash Heavy Metal",
+            logo: "http://radcap.ru/stylegraf/thrashheavy1.jpg",
+            stream: "http://213.141.131.10:8000/thrashheavy",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Thrash Metal",
+            logo: "http://radcap.ru/stylegraf/thrash.jpg",
+            stream: "http://79.120.77.11:8000/thrashmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Viking Metal",
+            logo: "http://radcap.ru/stylegraf/vikingmetal4.jpg",
+            stream: "http://79.111.14.76:8000/vikingmetal",
+            genre: "METAL MUSIC"
+        },
+        {
+            title: "Beatdown / Moshcore / Downtempo Hardcore / Metalcore",
+            logo: "http://radcap.ru/stylegraf/beatdown1.jpg",
+            stream: "http://79.111.14.76:8000/beatdown",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Crust Punk / Neocrust",
+            logo: "http://radcap.ru/stylegraf/crust.jpg",
+            stream: "http://79.120.39.202:8000/crust",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Deathcore / Melodic Deathcore",
+            logo: "http://radcap.ru/stylegraf/deathcore.jpg",
+            stream: "http://79.111.14.76:8000/deathcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Electronicore / Synthcore / Trancecore",
+            logo: "http://radcap.ru/stylegraf/electronicore.jpg",
+            stream: "http://79.111.119.111:8000/electronicore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Emocore / Screamo / Emo Violence",
+            logo: "http://radcap.ru/stylegraf/emocore7.jpg",
+            stream: "http://79.111.119.111:8000/screamoemo",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Grindcore / Deathgrind",
+            logo: "http://radcap.ru/stylegraf/grindcore.jpg",
+            stream: "http://79.120.77.11:8000/grindcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Hardcore / Melodic Hardcore",
+            logo: "http://radcap.ru/stylegraf/hardcore.jpg",
+            stream: "http://79.111.14.76:8000/hardcoremetal",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Hardcore Punk",
+            logo: "http://radcap.ru/stylegraf/hardcorepunk.jpg",
+            stream: "http://213.141.131.10:8000/hardcorepunk",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Mathcore / Chaotic Hardcore",
+            logo: "http://radcap.ru/stylegraf/mathcore.jpg",
+            stream: "http://79.120.39.202:8000/mathcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Melodic Metalcore",
+            logo: "http://radcap.ru/stylegraf/melodicmetalcore.jpg",
+            stream: "http://79.111.14.76:8000/melodicmetalcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Metalcore",
+            logo: "http://radcap.ru/stylegraf/metalcore4.jpg",
+            stream: "http://79.120.39.202:8000/metalcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Post Hardcore",
+            logo: "http://radcap.ru/stylegraf/posthardcore.jpg",
+            stream: "http://79.111.119.111:8000/posthardcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Progressive Metalcore",
+            logo: "http://radcap.ru/stylegraf/progmetalcore.jpg",
+            stream: "http://79.111.14.76:8000/progmetalcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Rapcore / Rap Metal",
+            logo: "http://radcap.ru/stylegraf/rapcore.jpg",
+            stream: "http://79.111.119.111:8000/rapcore",
+            genre: "HARDCORE"
+        },
+        {
+            title: "Acid House / Trance / Techno",
+            logo: "http://radcap.ru/stylegraf/acid.png",
+            stream: "http://79.111.119.111:8000/acid",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ambient",
+            logo: "http://radcap.ru/stylegraf/ambient2.jpg",
+            stream: "http://79.111.119.111:8000/ambient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ambient Dub",
+            logo: "http://radcap.ru/stylegraf/ambientdub1.jpg",
+            stream: "http://79.111.14.76:8000/ambientdub",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ambient House",
+            logo: "http://radcap.ru/stylegraf/ambienthouse.jpg",
+            stream: "http://79.120.12.130:8000/ambienthouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ambient / Intelligent / Techno / House",
+            logo: "http://radcap.ru/stylegraf/ambienttechno.jpg",
+            stream: "http://79.120.39.202:8000/ambienttechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Balearic House / Balearic Beat",
+            logo: "http://radcap.ru/stylegraf/balearichouse.jpg",
+            stream: "http://213.141.131.10:8000/balearichouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Big Room House",
+            logo: "http://radcap.ru/stylegraf/bigroomhouse.jpg",
+            stream: "http://213.141.131.10:8000/bigroomhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Breakbeat / Big Beat",
+            logo: "http://radcap.ru/stylegraf/breakbeat3.jpg",
+            stream: "http://79.120.39.202:8000/breakbeat",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Breakcore",
+            logo: "http://radcap.ru/stylegraf/breakcore3.jpg",
+            stream: "http://79.111.119.111:8000/breakcore",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Broken Beat / Bruk",
+            logo: "http://radcap.ru/stylegraf/brokenbeat.jpg",
+            stream: "http://79.120.77.11:8000/brokenbeat",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Chill Out",
+            logo: "http://radcap.ru/stylegraf/chillout4.jpg",
+            stream: "http://79.111.14.76:8000/chillout",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Chillwave / Hypnagogic Pop / Glo-Fi / Dream Beat / Vaporwave",
+            logo: "http://radcap.ru/stylegraf/chillwave.jpg",
+            stream: "http://79.111.119.111:8000/chillwave",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Chiptune / Chip Music",
+            logo: "http://radcap.ru/stylegraf/chiptune2.jpg",
+            stream: "http://79.111.119.111:8000/chiptune",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Club Dance Music",
+            logo: "http://radcap.ru/stylegraf/clubdance.jpg",
+            stream: "http://79.111.119.111:8000/clubdance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Cyberpunk",
+            logo: "http://radcap.ru/stylegraf/cyberpunk.jpg",
+            stream: "http://79.120.12.130:8000/cyberpunk",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Industrial / Dark / Ritual Ambient",
+            logo: "http://radcap.ru/stylegraf/ritamb.jpg",
+            stream: "http://79.120.39.202:8000/darkambient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dark Dubstep",
+            logo: "http://radcap.ru/stylegraf/darkdubstep4.jpg",
+            stream: "http://79.120.39.202:8000/darkdubstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dark Electro / Aggrotech",
+            logo: "http://radcap.ru/stylegraf/darkelektro4.jpg",
+            stream: "http://79.120.39.202:8000/darkelectro",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dark / Neo / Apocalyptic Folk",
+            logo: "http://radcap.ru/stylegraf/neofolk2.jpg",
+            stream: "http://79.111.119.111:8000/darkfolk",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dark Psytrance",
+            logo: "http://radcap.ru/stylegraf/darkpsytrance.jpg",
+            stream: "http://79.111.119.111:8000/darkpsytrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Darksynth / Dark Synthwave",
+            logo: "http://radcap.ru/stylegraf/darksynth2.jpg",
+            stream: "http://213.141.131.10:8000/darksynth",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dark Techno",
+            logo: "http://radcap.ru/stylegraf/darktechno2.jpg",
+            stream: "http://79.111.14.76:8000/darktechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Deathstep",
+            logo: "http://radcap.ru/stylegraf/deathstep.jpg",
+            stream: "http://79.111.14.76:8000/deathstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Deep / Chill House",
+            logo: "http://radcap.ru/stylegraf/deephouse1.jpg",
+            stream: "http://79.120.39.202:8000/deephouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Detroit Techno / Tech House",
+            logo: "http://radcap.ru/stylegraf/detroittech1.jpg",
+            stream: "http://213.141.131.10:8000/detroittechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Downtempo / Downbeat",
+            logo: "http://radcap.ru/stylegraf/downtempo4.jpg",
+            stream: "http://79.120.77.11:8000/downtempo",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dream Trance / House / Dance",
+            logo: "http://radcap.ru/stylegraf/dreamtrance3.jpg",
+            stream: "http://79.120.39.202:8000/dreamtrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Drone Ambient",
+            logo: "http://radcap.ru/stylegraf/droneambient.jpg",
+            stream: "http://79.111.119.111:8000/droneambient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "DRUM'n'BASS",
+            logo: "http://radcap.ru/stylegraf/drumnbass.jpg",
+            stream: "http://79.111.14.76:8000/drumbass",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Drumstep",
+            logo: "http://radcap.ru/stylegraf/drumstep.jpg",
+            stream: "http://79.120.39.202:8000/drumstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dubstep",
+            logo: "http://radcap.ru/stylegraf/dubstep3.jpg",
+            stream: "http://79.120.39.202:8000/dubstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dub Techno",
+            logo: "http://radcap.ru/stylegraf/dubtechno6.jpg",
+            stream: "http://79.120.39.202:8000/dubtechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Dungeon Synth",
+            logo: "http://radcap.ru/stylegraf/dungeonsynth.jpg",
+            stream: "http://79.120.12.130:8000/dungeonsynth",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ebm (electronic Body Music)",
+            logo: "http://radcap.ru/stylegraf/ebm1.jpg",
+            stream: "http://79.111.14.76:8000/ebm",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Edm (electronic Dance Music) Trap",
+            logo: "http://radcap.ru/stylegraf/edmtrap1.jpg",
+            stream: "http://213.141.131.10:8000/edmtrap",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electro / Electro Funk",
+            logo: "http://radcap.ru/stylegraf/electro2.jpg",
+            stream: "http://79.111.119.111:8000/electro",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electroclash / Synthcore / Tech Pop / Nouveau Disco",
+            logo: "http://radcap.ru/stylegraf/electroclash.jpg",
+            stream: "http://79.120.39.202:8000/electroclash",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electro House",
+            logo: "http://radcap.ru/stylegraf/electrohouse.jpg",
+            stream: "http://79.111.14.76:8000/electrohouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electro-Industrial",
+            logo: "http://radcap.ru/stylegraf/elindustr.jpg",
+            stream: "http://79.111.119.111:8000/electroindustrial",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electro Swing / Swing House",
+            logo: "http://radcap.ru/stylegraf/electroswing1.jpg",
+            stream: "http://213.141.131.10:8000/electroswing",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Electro Techno",
+            logo: "http://radcap.ru/stylegraf/electrotech.jpg",
+            stream: "http://213.141.131.10:8000/electrotechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Enigmatic / Mystic Pop",
+            logo: "http://radcap.ru/stylegraf/enigmatic.jpg",
+            stream: "http://213.141.131.10:8000/enigmatic",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Ethnic Electronica / Ethnotronica",
+            logo: "http://radcap.ru/stylegraf/ethnotronica.jpg",
+            stream: "http://79.120.39.202:8000/ethnotronica",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Euro House",
+            logo: "http://radcap.ru/stylegraf/eurohouse3.jpg",
+            stream: "http://79.111.119.111:8000/eurohouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Experimental Techno",
+            logo: "http://radcap.ru/stylegraf/exptechno.jpg",
+            stream: "http://213.141.131.10:8000/experimentaltechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Field Recordings",
+            logo: "http://radcap.ru/stylegraf/fieldrecordings.jpg",
+            stream: "http://213.141.131.10:8000/fieldrecording",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Forest Psytrance",
+            logo: "http://radcap.ru/stylegraf/forestpsytrance2.jpg",
+            stream: "http://213.141.131.10:8000/forestpsytrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Freestyle Music",
+            logo: "http://radcap.ru/stylegraf/freestyle.jpg",
+            stream: "http://79.120.12.130:8000/freestyle",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Full On / Melodic Psytrance / Morning Trance",
+            logo: "http://radcap.ru/stylegraf/fullon.jpg",
+            stream: "http://79.111.14.76:8000/fullon",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Funky House",
+            logo: "http://radcap.ru/stylegraf/funkyhouse.jpg",
+            stream: "http://213.141.131.10:8000/funkyhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Future Bass / Chill Trap",
+            logo: "http://radcap.ru/stylegraf/futurebass.jpg",
+            stream: "http://213.141.131.10:8000/futurebass",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Future Garage / Chillstep / Deep Dubstep / Post Dubstep",
+            logo: "http://radcap.ru/stylegraf/chillstep4.jpg",
+            stream: "http://79.120.39.202:8000/futuregarage",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Futurepop",
+            logo: "http://radcap.ru/stylegraf/futurepop1.jpg",
+            stream: "http://79.120.39.202:8000/futurepop",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Gabber / Early / Mainstream Hardcore",
+            logo: "http://radcap.ru/stylegraf/gabber11.jpg",
+            stream: "http://213.141.131.10:8000/gabber",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Garage / New York House",
+            logo: "http://radcap.ru/stylegraf/garagehouse.jpg",
+            stream: "http://79.120.12.130:8000/garagehouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Glitch / Glitch-Hop",
+            logo: "http://radcap.ru/stylegraf/glitch2.jpg",
+            stream: "http://79.111.14.76:8000/glitch",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Goa Trance",
+            logo: "http://radcap.ru/stylegraf/goa4.jpg",
+            stream: "http://79.120.39.202:8000/goatrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Grime",
+            logo: "http://radcap.ru/stylegraf/grime.jpg",
+            stream: "http://79.120.77.11:8000/grime",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Happy / Uk Hardcore / Happy Rave / Happycore",
+            logo: "http://radcap.ru/stylegraf/ukhardcore.jpg",
+            stream: "http://79.120.77.11:8000/happyhardcore",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Hardcore Techno / Schranz",
+            logo: "http://radcap.ru/stylegraf/hardtechno.jpg",
+            stream: "http://79.120.39.202:8000/hardcoretech",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Hard House / Uk Hard House",
+            logo: "http://radcap.ru/stylegraf/hardhouse3.jpg",
+            stream: "http://213.141.131.10:8000/hardhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Hardstyle",
+            logo: "http://radcap.ru/stylegraf/hardstyle.jpg",
+            stream: "http://79.111.14.76:8000/hardstyle",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Hard Trance",
+            logo: "http://radcap.ru/stylegraf/hardtrance3.jpg",
+            stream: "http://79.120.77.11:8000/hardtrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Hi-Tech / Psytrance",
+            logo: "http://radcap.ru/stylegraf/hitechpsy.jpg",
+            stream: "http://79.120.12.130:8000/hitechpsy",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "House Music",
+            logo: "http://radcap.ru/stylegraf/house4.jpg",
+            stream: "http://79.120.77.11:8000/house",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Idm (intelligent Dance Music)",
+            logo: "http://radcap.ru/stylegraf/idm2.jpg",
+            stream: "http://79.111.14.76:8000/idm",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Idm Ambient",
+            logo: "http://radcap.ru/stylegraf/idmambient.jpg",
+            stream: "http://213.141.131.10:8000/idmambient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Illbient",
+            logo: "http://radcap.ru/stylegraf/illbient.jpg",
+            stream: "http://213.141.131.10:8000/illbient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Indie Electronic / New Rave",
+            logo: "http://radcap.ru/stylegraf/indieelectronic.jpg",
+            stream: "http://79.111.119.111:8000/indieelectronic",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Industrial Music",
+            logo: "http://radcap.ru/stylegraf/industrial.jpg",
+            stream: "http://79.111.14.76:8000/industrial",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Industrial Techno",
+            logo: "http://radcap.ru/stylegraf/industrialtechno.jpg",
+            stream: "http://79.120.12.130:8000/industrialtechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Jumpstyle",
+            logo: "http://radcap.ru/stylegraf/jumpstyle.jpg",
+            stream: "http://79.120.12.130:8000/jumpstyle",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Jungle / Ragga Jungle / Raggacore",
+            logo: "http://radcap.ru/stylegraf/jungle.jpg",
+            stream: "http://213.141.131.10:8000/jungle",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Leftfield",
+            logo: "http://radcap.ru/stylegraf/leftfield1.jpg",
+            stream: "http://79.120.39.202:8000/leftfield",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Liquid Funk / Intelligent / Atmospheric DRUM'n'BASS",
+            logo: "http://radcap.ru/stylegraf/intelligent.jpg",
+            stream: "http://79.111.119.111:8000/liquidfunk",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Lo-Fi",
+            logo: "http://radcap.ru/stylegraf/lofi.jpg",
+            stream: "http://79.111.14.76:8000/lo-fi",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Lounge Music",
+            logo: "http://radcap.ru/stylegraf/lounge1.jpg",
+            stream: "http://79.111.14.76:8000/lounge",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Makina",
+            logo: "http://radcap.ru/stylegraf/makina.jpg",
+            stream: "http://79.120.12.130:8000/makina",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Martial Industrial / Military Pop",
+            logo: "http://radcap.ru/stylegraf/martialindustrial.jpg",
+            stream: "http://79.111.14.76:8000/martialindustrial",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Melodic House / Techno",
+            logo: "http://radcap.ru/stylegraf/melodichouse.jpg",
+            stream: "http://79.120.12.130:8000/melodichouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Metalstep / Metal Dubstep",
+            logo: "http://radcap.ru/stylegraf/metalstep.jpg",
+            stream: "http://79.111.14.76:8000/metalstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Minimal Techno",
+            logo: "http://radcap.ru/stylegraf/mintech.jpg",
+            stream: "http://79.120.39.202:8000/mintechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Minimal Tech House",
+            logo: "http://radcap.ru/stylegraf/mintechhouse.jpg",
+            stream: "http://79.111.119.111:8000/mintechhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Musique Concrete / Acousmatic / Electroacoustic",
+            logo: "http://radcap.ru/stylegraf/concrete.jpg",
+            stream: "http://213.141.131.10:8000/musiqueconcrete",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Neurofunk / Technoid / Techstep",
+            logo: "http://radcap.ru/stylegraf/neurofunk3.jpg",
+            stream: "http://79.111.119.111:8000/neurofunk",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "New Age Music",
+            logo: "http://radcap.ru/stylegraf/newage.jpg",
+            stream: "http://79.120.77.11:8000/newage",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "New Beat",
+            logo: "http://radcap.ru/stylegraf/newbeat.jpg",
+            stream: "http://79.120.12.130:8000/newbeat",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Night Full On / Psytrance",
+            logo: "http://radcap.ru/stylegraf/nightfullon1.jpg",
+            stream: "http://213.141.131.10:8000/nightpsytrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Nitzhonot (psychedelic Trance)",
+            logo: "http://radcap.ru/stylegraf/nitzhonot.jpg",
+            stream: "http://213.141.131.10:8000/nitzhonot",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Noise / Power Noise / Electronics",
+            logo: "http://radcap.ru/stylegraf/noise.jpg",
+            stream: "http://79.120.39.202:8000/noise",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Organic House",
+            logo: "http://radcap.ru/stylegraf/organichouse.jpg",
+            stream: "http://79.120.12.130:8000/organichouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Progressive / Atmospheric Breaks",
+            logo: "http://radcap.ru/stylegraf/progbreaks.jpg",
+            stream: "http://79.120.12.130:8000/progbreaks",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Progressive Electronic",
+            logo: "http://radcap.ru/stylegraf/progelectronic.jpg",
+            stream: "http://79.120.12.130:8000/progelectronic",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Progressive House",
+            logo: "http://radcap.ru/stylegraf/proghouse.jpg",
+            stream: "http://79.111.119.111:8000/proghouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Progressive Trance",
+            logo: "http://radcap.ru/stylegraf/progtrance.jpg",
+            stream: "http://79.120.39.202:8000/progtrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Psybient / Ambient Psytrance / Ambient Goa / Psychill / Psydub",
+            logo: "http://radcap.ru/stylegraf/psybient4.jpg",
+            stream: "http://79.111.14.76:8000/psybient",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Progressive Psytrance / Psy-Prog / Psy Progressive",
+            logo: "http://radcap.ru/stylegraf/psyprog.jpg",
+            stream: "http://79.120.39.202:8000/psyprog",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Psychedelic Trance / Psytrance / Psy",
+            logo: "http://radcap.ru/stylegraf/psytrance.jpg",
+            stream: "http://79.111.119.111:8000/psytrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Pumping House / Hard Bass / Metal Shade / Scouse / Poky / Bumping",
+            logo: "http://radcap.ru/stylegraf/pumpinghouse.jpg",
+            stream: "http://79.120.77.11:8000/pumpinghouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Retro Electro (retrowave / Synthwave / Dreamwave / Outrun Electro)",
+            logo: "http://radcap.ru/stylegraf/retrowave3.jpg",
+            stream: "http://79.120.39.202:8000/retrowave",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Riddim Dubstep",
+            logo: "http://radcap.ru/stylegraf/riddimdubstep.jpg",
+            stream: "http://79.111.119.111:8000/riddimdubstep",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Russian Club Dance Music",
+            logo: "http://radcap.ru/stylegraf/clubru.jpg",
+            stream: "http://79.120.77.11:8000/clubru",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Soulful House",
+            logo: "http://radcap.ru/stylegraf/soulfulhouse.jpg",
+            stream: "http://79.111.119.111:8000/soulfulhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Space Music",
+            logo: "http://radcap.ru/stylegraf/spacemusic4.jpg",
+            stream: "http://79.111.119.111:8000/spacemusic",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Spacesynth / Synthdance / Spacedance",
+            logo: "http://radcap.ru/stylegraf/spacesynth.jpg",
+            stream: "http://79.120.39.202:8000/spacesynth",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Suomisaundi / Freeform Psytrance / Spugedelic Trance",
+            logo: "http://radcap.ru/stylegraf/suomisaundi.jpg",
+            stream: "http://79.120.77.11:8000/suomisaundi",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Synthpop / Electropop / Technopop",
+            logo: "http://radcap.ru/stylegraf/synthpop8.jpg",
+            stream: "http://79.120.77.11:8000/synthpop",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Techno",
+            logo: "http://radcap.ru/stylegraf/techno3.jpg",
+            stream: "http://79.120.77.11:8000/techno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Techno Trance / Techtrance",
+            logo: "http://radcap.ru/stylegraf/techtrance.jpg",
+            stream: "http://213.141.131.10:8000/techtrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Traditional Electronic Music",
+            logo: "http://radcap.ru/stylegraf/traditionalelectronic1.jpg",
+            stream: "http://79.111.14.76:8000/tradelectronic",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Trance (electronic Music)",
+            logo: "http://radcap.ru/stylegraf/trance.jpg",
+            stream: "http://79.120.77.11:8000/trance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Tribal House",
+            logo: "http://radcap.ru/stylegraf/tribalhouse.jpg",
+            stream: "http://213.141.131.10:8000/tribalhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Trip-Hop",
+            logo: "http://radcap.ru/stylegraf/triphop.jpg",
+            stream: "http://79.111.14.76:8000/triphop",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Twilight / Psytrance",
+            logo: "http://radcap.ru/stylegraf/twilightpsy.jpg",
+            stream: "http://79.120.12.130:8000/twilightpsy",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Underground Techno / Tech House",
+            logo: "http://radcap.ru/stylegraf/undergroundtech.jpg",
+            stream: "http://213.141.131.10:8000/undergroundtechno",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Uplifting Trance",
+            logo: "http://radcap.ru/stylegraf/upliftingtrance1.jpg",
+            stream: "http://79.111.119.111:8000/upliftingtrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Vocal Trance",
+            logo: "http://radcap.ru/stylegraf/vocaltrance5.jpg",
+            stream: "http://79.120.39.202:8000/vocaltrance",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Witch House",
+            logo: "http://radcap.ru/stylegraf/witchhouse6.jpg",
+            stream: "http://79.120.77.11:8000/witchhouse",
+            genre: "ELECTRONIC MUSIC"
+        },
+        {
+            title: "Abstract / Experimental Hip-Hop",
+            logo: "http://radcap.ru/stylegraf/abstracthiphop1.jpg",
+            stream: "http://79.111.14.76:8000/abstracthiphop",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Chicano Rap",
+            logo: "http://radcap.ru/stylegraf/chicanorap1.jpg",
+            stream: "http://213.141.131.10:8000/chicanorap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Cloud Rap / Trillwave",
+            logo: "http://radcap.ru/stylegraf/cloudrap1.jpg",
+            stream: "http://213.141.131.10:8000/cloudrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "East Coast Rap / Hip-Hop",
+            logo: "http://radcap.ru/stylegraf/eastcoastrap.jpg",
+            stream: "http://79.111.14.76:8000/eastcoastrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "French Hip-Hop / Rap",
+            logo: "http://radcap.ru/stylegraf/frenchrap.jpg",
+            stream: "http://213.141.131.10:8000/frenchrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "West Coast / Gangsta Rap / G-Funk",
+            logo: "http://radcap.ru/stylegraf/gangsta2.jpg",
+            stream: "http://79.120.39.202:8000/gangstarap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "German / Deutsche Hip-Hop / Rap",
+            logo: "http://radcap.ru/stylegraf/germanrap.jpg",
+            stream: "http://213.141.131.10:8000/germanrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Hardcore Rap / Horrorcore",
+            logo: "http://radcap.ru/stylegraf/hardcorerap.jpg",
+            stream: "http://79.120.39.202:8000/hardcorerap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Hip-Hop Music",
+            logo: "http://radcap.ru/stylegraf/hiphop2.jpg",
+            stream: "http://79.120.77.11:8000/hiphop",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Instrumental Hip-Hop",
+            logo: "http://radcap.ru/stylegraf/instrumentalhiphop1.jpg",
+            stream: "http://79.120.77.11:8000/instrumentalhiphop",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Jazz Rap / Jazz Hop / Jazzy Hip-Hop",
+            logo: "http://radcap.ru/stylegraf/jazzrap2.jpg",
+            stream: "http://79.120.39.202:8000/jazzrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Memphis Rap / Hip Hop",
+            logo: "http://radcap.ru/stylegraf/memphisrap3.jpg",
+            stream: "http://213.141.131.10:8000/memphisrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Old School Hip-Hop / Rap",
+            logo: "http://radcap.ru/stylegraf/oldschhiphop.jpg",
+            stream: "http://213.141.131.10:8000/oldschoolhiphop",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Rap Music",
+            logo: "http://radcap.ru/stylegraf/rap.jpg",
+            stream: "http://79.120.77.11:8000/rap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Russian Rap / Hip Hop",
+            logo: "http://radcap.ru/stylegraf/rapru3.jpg",
+            stream: "http://79.120.77.11:8000/rapru",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Southern Rap / Hip-Hop / Crunk",
+            logo: "http://radcap.ru/stylegraf/southernrap.jpg",
+            stream: "http://79.111.119.111:8000/southernrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Uk / British Hip-Hop / Rap",
+            logo: "http://radcap.ru/stylegraf/ukrap.jpg",
+            stream: "http://213.141.131.10:8000/ukhiphop",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Underground Rap / Hip-Hop",
+            logo: "http://radcap.ru/stylegraf/undergroundrap.jpg",
+            stream: "http://79.111.14.76:8000/undergroundrap",
+            genre: "HIP-HOP / RAP MUSIC"
+        },
+        {
+            title: "Russian Author's / Bard Song",
+            logo: "http://radcap.ru/stylegraf/bard1.jpg",
+            stream: "http://79.120.39.202:8000/bardru",
+            genre: "RUSSIAN SHANSON"
+        },
+        {
+            title: "Gypsy Romances / Songs",
+            logo: "http://radcap.ru/stylegraf/gypsyru2.jpg",
+            stream: "http://79.120.77.11:8000/gypsyru",
+            genre: "RUSSIAN SHANSON"
+        },
+        {
+            title: "Russian Post Shanson",
+            logo: "http://radcap.ru/stylegraf/postshanson8.jpg",
+            stream: "http://79.120.77.11:8000/postshanson",
+            genre: "RUSSIAN SHANSON"
+        },
+        {
+            title: "Russian / Urban / Cruel Romance",
+            logo: "http://radcap.ru/stylegraf/romance4.jpg",
+            stream: "http://79.120.77.11:8000/romanceru",
+            genre: "RUSSIAN SHANSON"
+        },
+        {
+            title: "Russian Shanson",
+            logo: "http://radcap.ru/stylegraf/shansonru.jpg",
+            stream: "http://79.120.77.11:8000/shansonru",
+            genre: "RUSSIAN SHANSON"
+        },
+        {
+            title: "60's Music Collection",
+            logo: "http://radcap.ru/stylegraf/60s.jpg",
+            stream: "http://213.141.131.10:8000/60collection",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "70's Music Collection",
+            logo: "http://radcap.ru/stylegraf/70s.jpg",
+            stream: "http://213.141.131.10:8000/70collection",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "80's Music Collection",
+            logo: "http://radcap.ru/stylegraf/pop802.jpg",
+            stream: "http://79.120.39.202:8000/pop80",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "90's Music Collection",
+            logo: "http://radcap.ru/stylegraf/90.jpg",
+            stream: "http://213.141.131.10:8000/90collection",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "2000's Music Collection",
+            logo: "http://radcap.ru/stylegraf/00s.jpg",
+            stream: "http://79.120.12.130:8000/00collection",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Accordion / Bayan / Harmon",
+            logo: "http://radcap.ru/stylegraf/accordeon1.jpg",
+            stream: "http://79.111.119.111:8000/accordion",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Acoustic &amp; Unplugged",
+            logo: "http://radcap.ru/stylegraf/acoustic.jpg",
+            stream: "http://213.141.131.10:8000/acoustic",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Acoustic Guitar",
+            logo: "http://radcap.ru/stylegraf/acousticguitar1.jpg",
+            stream: "http://79.120.39.202:8000/acousticguitar",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Anime Ost / Score",
+            logo: "http://radcap.ru/stylegraf/anime2.jpg",
+            stream: "http://79.111.119.111:8000/anime",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Ballroom Dance",
+            logo: "http://radcap.ru/stylegraf/ballroomdance1.jpg",
+            stream: "http://79.111.14.76:8000/ballroomdance",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Computer / Video Game Music (ost / Score / Soundtrack)",
+            logo: "http://radcap.ru/stylegraf/game3.jpg",
+            stream: "http://79.120.39.202:8000/musicgame",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Easy Listening / Mood Music",
+            logo: "http://radcap.ru/stylegraf/easylistening2.jpg",
+            stream: "http://79.111.14.76:8000/easylistening",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Erotic / Sensual Music",
+            logo: "http://radcap.ru/stylegraf/ero3.jpg",
+            stream: "http://79.120.39.202:8000/erotic",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Experimental / Avant-Garde Music",
+            logo: "http://radcap.ru/stylegraf/experimentalmusic1.jpg",
+            stream: "http://79.111.119.111:8000/experimentalmusic",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Flute",
+            logo: "http://radcap.ru/stylegraf/flute3.jpg",
+            stream: "http://79.111.14.76:8000/flute",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Hammond / Wurlitzer / Thomas Organs",
+            logo: "http://radcap.ru/stylegraf/hammond2.jpg",
+            stream: "http://79.120.39.202:8000/hammond",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Healing Music (yoga, Reiki, Zen, ...)",
+            logo: "http://radcap.ru/stylegraf/healing1.jpg",
+            stream: "http://213.141.131.10:8000/healing",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Indian Cinema Music",
+            logo: "http://radcap.ru/stylegraf/indiancinema.jpg",
+            stream: "http://79.120.39.202:8000/indiancinema",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Instrumental Popular Music",
+            logo: "http://radcap.ru/stylegraf/instrumental.jpg",
+            stream: "http://79.120.77.11:8000/instrumental",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Love Songs / Collection",
+            logo: "http://radcap.ru/stylegraf/lovesongs.jpg",
+            stream: "http://213.141.131.10:8000/lovesongs",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Meditation Music",
+            logo: "http://radcap.ru/stylegraf/meditation.jpg",
+            stream: "http://79.120.77.11:8000/meditation",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Military Songs / Marches Of Russia",
+            logo: "http://radcap.ru/stylegraf/rusmilsong.jpg",
+            stream: "http://79.111.119.111:8000/rusmilsong",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Miscellaneous / Compilation",
+            logo: "http://radcap.ru/stylegraf/misc2.jpg",
+            stream: "http://79.120.77.11:8000/misc",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Modern Classical Music",
+            logo: "http://radcap.ru/stylegraf/modernclass2.jpg",
+            stream: "http://79.120.39.202:8000/modernclassical",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Neoclassical Music",
+            logo: "http://radcap.ru/stylegraf/neoclassicalmusic1.jpg",
+            stream: "http://79.120.39.202:8000/neoclassical",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Oldies / Doo-Wop / Early Pop / Early R'n'b",
+            logo: "http://radcap.ru/stylegraf/oldies.jpg",
+            stream: "http://79.120.77.11:8000/oldies",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Piano (easy Listening / Instrumental / New Age)",
+            logo: "http://radcap.ru/stylegraf/piano6.jpg",
+            stream: "http://79.120.77.11:8000/piano",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Relaxation Music",
+            logo: "http://radcap.ru/stylegraf/relax2.jpg",
+            stream: "http://79.120.39.202:8000/relaxation",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Romantic Music Collection",
+            logo: "http://radcap.ru/stylegraf/romantic.jpg",
+            stream: "http://79.120.39.202:8000/romantic",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Russian Poetry / Poems",
+            logo: "http://radcap.ru/stylegraf/poetry1.jpg",
+            stream: "http://79.120.77.11:8000/poetryru",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Saxophone",
+            logo: "http://radcap.ru/stylegraf/saxophone.jpg",
+            stream: "http://79.120.77.11:8000/saxophone",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Singer-Songwriter",
+            logo: "http://radcap.ru/stylegraf/singer1.jpg",
+            stream: "http://213.141.131.10:8000/singersongwriter",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Sounds Of Nature",
+            logo: "http://radcap.ru/stylegraf/soundsnat3.jpg",
+            stream: "http://79.111.14.76:8000/soundnat",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Trailer / Production Music",
+            logo: "http://radcap.ru/stylegraf/trailer1.jpg",
+            stream: "http://79.111.119.111:8000/trailer",
+            genre: "MISCELLANEOUS"
+        },
+        {
+            title: "Vocal",
+            logo: "http://radcap.ru/stylegraf/vocal555.jpg",
+            stream: "http://79.120.77.11:8000/vocal",
+            genre: "MISCELLANEOUS"
+        }
