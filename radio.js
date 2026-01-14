@@ -15,7 +15,6 @@
   var _events = {};
   var _component;
   var played = false;
-  var changeWave = function () { };
 
   // Константы
   var MAX_RECENT_STATIONS = 14;
@@ -825,41 +824,11 @@
       }
     }
 
-    changeWave = function (class_name) {
-      var wave = info_html.find('.lamparadio-info__wave');
-      if (wave) {
-        var lines = wave.querySelectorAll('div');
-        for (var i = 0; i < lines.length; i++) {
-          lines[i].removeClass('play loading').addClass(class_name);
-          lines[i].style['animation-duration'] = (class_name == 'loading' ? 400 : 200 + Math.random() * 200) + 'ms';
-          lines[i].style['animation-delay'] = (class_name == 'loading' ? Math.round(400 / lines.length * i) : 0) + 'ms';
-        }
-      }
-    };
-
-    function createWave() {
-      var box = info_html.find('.lamparadio-info__wave');
-      if (box) {
-        for (var i = 0; i < 15; i++) {
-          var div = document.createElement('div');
-          box.append(div);
-        }
-        changeWave(played ? 'play' : 'loading');
-      }
-    }
-
-    on("playing", function () {
-      changeWave('play');
-    });
-    on("waiting", function () {
-      changeWave('loading');
-    });
-
     this.create = function () {
       var cover = Lampa.Template.js('lamparadio_cover');
       cover.find('.lamparadio-cover__station').text(station.title || '');
       cover.find('.lamparadio-cover__genre').text(station.genre || '');
-      cover.find('.lamparadio-cover__tooltip').text(station.description || station.title || '');
+      // Название внизу удалено
 
       var img_box = cover.find('.lamparadio-cover__img-box');
       img_box.removeClass('loaded loaded-icon');
@@ -880,7 +849,6 @@
       });
 
       document.body.append(info_html);
-      createWave();
     };
 
     this.destroy = function () {
@@ -1135,7 +1103,6 @@
       '<canvas id="canvas"></canvas>' +
       '<div>' +
       '<div class="lamparadio-info__cover"></div>' +
-      '<div class="lamparadio-info__wave"></div>' +
       '</div>' +
       '<div class="lamparadio-info__close">' +
       '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329.269 329" xml:space="preserve">' +
@@ -1154,7 +1121,6 @@
       '</div>' +
       '<div class="lamparadio-cover__album"><svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h24v24h-24z" fill="none"/><path d="m12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10-10-4.48-10-10 4.48-10 10-10zm0 14c2.213 0 4-1.787 4-4s-1.787-4-4-4-4 1.787-4 4 1.787 4 4 4zm0-5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z" fill="#eee"/></svg><span class="lamparadio-cover__album_title"></span></div>' +
       '<div class="lamparadio-cover__title"></div>' +
-      '<div class="lamparadio-cover__tooltip"></div>' +
       '<div class="lamparadio-cover__playlist"></div>' +
       '</div>');
 
@@ -1218,14 +1184,9 @@
       '.lamparadio-cover__album { font-weight: 300; font-size: 1em; margin-top: 0.4em; }' +
       '.lamparadio-cover__album > svg { width: 0em; height: 1.25em; margin-right: 0.2em; vertical-align: text-bottom; }' +
       '.lamparadio-cover__title { font-weight: 600; font-size: 1.5em; margin-top: 0.6em; }' +
-      '.lamparadio-cover__tooltip { font-weight: 300; font-size: 1.3em; margin-top: 0.2em; }' +
       '.lamparadio-cover__playlist { font-weight: 300; font-size: 1.3em; margin-top: 0.2em; }' +
       '.lamparadio-info { position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; -moz-box-pack: center; -ms-flex-pack: center; justify-content: center; }' +
       '.lamparadio-info__cover { width: 30em; }' +
-      '.lamparadio-info__wave { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; -moz-box-pack: center; -ms-flex-pack: center; justify-content: center; margin-top: 2em; }' +
-      '.lamparadio-info__wave > div { width: 2px; background-color: #fff; margin: 0 0.3em; height: 1em; opacity: 0; }' +
-      '.lamparadio-info__wave > div.loading { -webkit-animation: lamparadioAnimationWaveLoading 400ms ease infinite; -moz-animation: lamparadioAnimationWaveLoading 400ms ease infinite; -o-animation: lamparadioAnimationWaveLoading 400ms ease infinite; animation: lamparadioAnimationWaveLoading 400ms ease infinite; }' +
-      '.lamparadio-info__wave > div.play { -webkit-animation: lamparadioAnimationWavePlay 50ms linear infinite alternate; -moz-animation: lamparadioAnimationWavePlay 50ms linear infinite alternate; -o-animation: lamparadioAnimationWavePlay 50ms linear infinite alternate; animation: lamparadioAnimationWavePlay 50ms linear infinite alternate; }' +
       '.lamparadio-info__close { position: fixed; top: 5em; right: 50%; margin-right: -2em; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; padding: 1em; display: none; background-color: rgba(255, 255, 255, 0.1); }' +
       '.lamparadio-info__close > svg { width: 1.5em; height: 1.5em; }' +
       'body.true--mobile .lamparadio-info__close { display: block; }' +
@@ -1240,8 +1201,6 @@
       '.lamparadio-dialog__item[data-action="play"] { color: #4CAF50; }' +
       '@keyframes sound { 0% { height: 0.1em; } 100% { height: 1em; } }' +
       '@keyframes sound-loading { 0% { -webkit-transform: rotate(0deg); -moz-transform: rotate(0deg); -o-transform: rotate(0deg); transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform: rotate(360deg); transform: rotate(360deg); } }' +
-      '@keyframes lamparadioAnimationWaveLoading { 0% { -webkit-transform: scale3d(1, 0.3, 1); -moz-transform: scale3d(1, 0.3, 1); transform: scale3d(1, 0.3, 1); opacity: 1; } 10% { -webkit-transform: scale3d(1, 1.5, 1); -moz-transform: scale3d(1, 1.5, 1); transform: scale3d(1, 1.5, 1); opacity: 1; } 20% { -webkit-transform: scale3d(1, 0.3, 1); -moz-transform: scale3d(1, 0.3, 1); transform: scale3d(1, 0.3, 1); opacity: 1; } 100% { -webkit-transform: scale3d(1, 0.3, 1); -moz-transform: scale3d(1, 0.3, 1); transform: scale3d(1, 0.3, 1); opacity: 1; } }' +
-      '@keyframes lamparadioAnimationWavePlay { 0% { -webkit-transform: scale3d(1, 0.3, 1); -moz-transform: scale3d(1, 0.3, 1); transform: scale3d(1, 0.3, 1); opacity: 0.3; } 100% { -webkit-transform: scale3d(1, 2, 1); -moz-transform: scale3d(1, 2, 1); transform: scale3d(1, 2, 1); opacity: 1; } }' +
       '</style>');
 
     Lampa.Component.add("lamparadio", Component);
