@@ -1286,6 +1286,171 @@
     addSettings();
   }
 
+  // Функция для получения текущего активного пресета
+  function getCurrentPreset() {
+    var currentColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
+    var currentBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
+    var currentOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+    var currentGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
+    
+    for (var i = 0; i < COLOR_PRESETS.length; i++) {
+      var preset = COLOR_PRESETS[i];
+      if (preset.color === currentColor && 
+          preset.bgColor === currentBgColor && 
+          Math.abs(preset.opacity - currentOpacity) < 0.01 &&
+          preset.glow === currentGlow) {
+        return preset;
+      }
+    }
+    return null;
+  }
+
+  // Функция для открытия диалога выбора пресетов
+  function openColorPresetsDialog(item) {
+    // Создаем диалог
+    var dialogHtml = Lampa.Template.get('lamparadio_presets_dialog', {});
+    
+    var itemsContainer = dialogHtml.find('.lamparadio-presets-dialog__items');
+    var scrollContainer = dialogHtml.find('.lamparadio-presets-dialog__scroll');
+    
+    // Добавляем пресеты в диалог
+    COLOR_PRESETS.forEach(function(preset) {
+      var presetElement = $('<div class="lamparadio-presets-dialog__item" data-preset-id="' + preset.id + '">' +
+        '<div class="lamparadio-presets-dialog__item-color" style="background-color: ' + 
+        (preset.color === 'rainbow' ? 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)' : 
+         preset.color === 'gradient' ? 'linear-gradient(90deg, blue, green, yellow, orange, red)' : 
+         preset.color) + '"></div>' +
+        '<div class="lamparadio-presets-dialog__item-name">' + preset.name + '</div>' +
+        '</div>');
+      
+      // Проверяем, активен ли этот пресет
+      var currentPreset = getCurrentPreset();
+      if (currentPreset && currentPreset.id === preset.id) {
+        presetElement.addClass('active');
+      }
+      
+      presetElement.on('hover:enter', function() {
+        // Применяем пресет
+        applyPreset(preset);
+        
+        // Закрываем диалог
+        closeDialog();
+        
+        // Показываем уведомление
+        Lampa.Noty.show('Пресет "' + preset.name + '" применен');
+        
+        // Обновляем настройки
+        updateColorSettings(preset);
+      });
+      
+      itemsContainer.append(presetElement);
+    });
+    
+    // Добавляем диалог на страницу
+    $('body').append(dialogHtml);
+    
+    // Функция закрытия диалога
+    var dialogActive = true;
+    function closeDialog() {
+      if (!dialogActive) return;
+      dialogActive = false;
+      
+      // Удаляем диалог
+      dialogHtml.remove();
+      
+      // Возвращаем фокус на элемент настроек
+      if (item && item.length) {
+        Lampa.Controller.collectionFocus(item[0], $('.settings-param'));
+      }
+      
+      // Возвращаем управление контроллеру настроек
+      Lampa.Controller.toggle('settings');
+    }
+    
+    // Закрытие по клику вне диалога
+    dialogHtml.on('click', function(e) {
+      if ($(e.target).hasClass('lamparadio-presets-dialog')) {
+        closeDialog();
+      }
+    });
+    
+    // Управление диалогом с клавиатуры/пульта
+    var dialogController = {
+      toggle: function() {
+        Lampa.Controller.collectionSet(dialogHtml);
+        // Фокусируемся на активном элементе или первом
+        var activeItem = dialogHtml.find('.lamparadio-presets-dialog__item.active');
+        if (activeItem.length) {
+          Lampa.Controller.collectionFocus(activeItem[0], dialogHtml);
+          // Прокручиваем к активному элементу
+          var scrollTop = activeItem.position().top - scrollContainer.position().top;
+          scrollContainer.scrollTop(scrollTop - 100);
+        } else {
+          Lampa.Controller.collectionFocus(dialogHtml.find('.lamparadio-presets-dialog__item').first()[0], dialogHtml);
+        }
+      },
+      back: function() {
+        closeDialog();
+        return true;
+      },
+      up: function() {
+        var items = dialogHtml.find('.lamparadio-presets-dialog__item');
+        var focused = dialogHtml.find('.lamparadio-presets-dialog__item.focus');
+        var index = focused.length ? items.index(focused) : 0;
+        if (index > 0) {
+          items.removeClass('focus');
+          var newFocused = items.eq(index - 1);
+          newFocused.addClass('focus');
+          
+          // Прокручиваем к элементу, если он не виден
+          var scrollTop = newFocused.position().top - scrollContainer.position().top;
+          var itemHeight = newFocused.outerHeight();
+          var containerHeight = scrollContainer.height();
+          
+          if (scrollTop < 0) {
+            scrollContainer.scrollTop(scrollContainer.scrollTop() + scrollTop - 10);
+          } else if (scrollTop + itemHeight > containerHeight) {
+            scrollContainer.scrollTop(scrollContainer.scrollTop() + (scrollTop + itemHeight - containerHeight) + 10);
+          }
+        }
+        return true;
+      },
+      down: function() {
+        var items = dialogHtml.find('.lamparadio-presets-dialog__item');
+        var focused = dialogHtml.find('.lamparadio-presets-dialog__item.focus');
+        var index = focused.length ? items.index(focused) : 0;
+        if (index < items.length - 1) {
+          items.removeClass('focus');
+          var newFocused = items.eq(index + 1);
+          newFocused.addClass('focus');
+          
+          // Прокручиваем к элементу, если он не виден
+          var scrollTop = newFocused.position().top - scrollContainer.position().top;
+          var itemHeight = newFocused.outerHeight();
+          var containerHeight = scrollContainer.height();
+          
+          if (scrollTop < 0) {
+            scrollContainer.scrollTop(scrollContainer.scrollTop() + scrollTop - 10);
+          } else if (scrollTop + itemHeight > containerHeight) {
+            scrollContainer.scrollTop(scrollContainer.scrollTop() + (scrollTop + itemHeight - containerHeight) + 10);
+          }
+        }
+        return true;
+      },
+      enter: function() {
+        var focused = dialogHtml.find('.lamparadio-presets-dialog__item.focus');
+        if (focused.length) {
+          focused.trigger('hover:enter');
+        }
+        return true;
+      }
+    };
+    
+    // Активируем управление диалогом
+    Lampa.Controller.add('lamparadio-presets-dialog', dialogController);
+    Lampa.Controller.toggle('lamparadio-presets-dialog');
+  }
+
   function addSettings() {
     if (window.lamparadio_add_param_ready) return;
     window.lamparadio_add_param_ready = true;
@@ -1339,56 +1504,19 @@
         // Скрываем стандартный чекбокс
         item.find('.settings-param__value').hide();
         
-        // Создаем контейнер для пресетов
-        var presetsContainer = $('<div class="lamparadio-presets-container"></div>');
+        // Получаем текущий пресет
+        var currentPreset = getCurrentPreset();
+        var currentText = currentPreset ? 'Текущий: ' + currentPreset.name : 'Не выбран';
         
-        // Добавляем пресеты
-        COLOR_PRESETS.forEach(function(preset) {
-          var presetElement = $('<div class="lamparadio-preset" data-preset-id="' + preset.id + '">' +
-            '<div class="lamparadio-preset__color" style="background-color: ' + (preset.color === 'rainbow' ? 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)' : preset.color === 'gradient' ? 'linear-gradient(90deg, blue, green, yellow, orange, red)' : preset.color) + '"></div>' +
-            '<div class="lamparadio-preset__name">' + preset.name + '</div>' +
-            '</div>');
-          
-          presetElement.on('click', function() {
-            // Применяем пресет
-            applyPreset(preset);
-            
-            // Подсвечиваем выбранный пресет
-            presetsContainer.find('.lamparadio-preset').removeClass('active');
-            $(this).addClass('active');
-            
-            // Показываем уведомление
-            Lampa.Noty.show('Пресет "' + preset.name + '" применен');
-            
-            // Обновляем остальные настройки цветов, если они уже отображены
-            updateColorSettings(preset);
-          });
-          
-          presetsContainer.append(presetElement);
+        // Добавляем текст текущего пресета в описание
+        var description = item.find('.settings-param__descr');
+        description.append('<div class="lamparadio-current-preset">' + currentText + '</div>');
+        
+        // Обработчик для открытия диалога с пресетами
+        item.on('hover:enter', function() {
+          openColorPresetsDialog(item);
+          return false;
         });
-        
-        // Проверяем, какой пресет сейчас активен
-        var currentColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
-        var currentBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
-        var currentOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
-        var currentGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
-        
-        // Ищем совпадение с пресетами
-        var matchingPreset = COLOR_PRESETS.find(function(preset) {
-          return preset.color === currentColor && 
-                 preset.bgColor === currentBgColor && 
-                 Math.abs(preset.opacity - currentOpacity) < 0.01 &&
-                 preset.glow === currentGlow;
-        });
-        
-        // Если нашли совпадение, подсвечиваем пресет
-        if (matchingPreset) {
-          setTimeout(function() {
-            presetsContainer.find('.lamparadio-preset[data-preset-id="' + matchingPreset.id + '"]').addClass('active');
-          }, 100);
-        }
-        
-        item.find('.settings-param__descr').append(presetsContainer);
       }
     });
 
@@ -1538,6 +1666,18 @@
     if (glowCheckbox.length) {
       glowCheckbox.prop('checked', preset.glow);
     }
+    
+    // Обновляем текст текущего пресета в настройках
+    var presetItem = $('.settings-param[data-param="lamparadio_color_presets"]');
+    if (presetItem.length) {
+      var currentText = 'Текущий: ' + preset.name;
+      var currentPresetDiv = presetItem.find('.lamparadio-current-preset');
+      if (currentPresetDiv.length) {
+        currentPresetDiv.text(currentText);
+      } else {
+        presetItem.find('.settings-param__descr').append('<div class="lamparadio-current-preset">' + currentText + '</div>');
+      }
+    }
   }
 
   function createRadio() {
@@ -1594,7 +1734,7 @@
       '</div>' +
       '</div>');
 
-    // Шаблон для диалога
+    // Шаблон для диалога станций
     Lampa.Template.add('lamparadio_dialog', '<div class="lamparadio-dialog">' +
       '<div class="lamparadio-dialog__content">' +
       '<div class="lamparadio-dialog__title">{title}</div>' +
@@ -1602,7 +1742,17 @@
       '</div>' +
       '</div>');
 
-    // CSS стили с добавлением стилей для пустого состояния и информационного блока
+    // Шаблон для диалога пресетов с прокруткой
+    Lampa.Template.add('lamparadio_presets_dialog', '<div class="lamparadio-presets-dialog">' +
+      '<div class="lamparadio-presets-dialog__content">' +
+      '<div class="lamparadio-presets-dialog__title">Выберите цветовой пресет</div>' +
+      '<div class="lamparadio-presets-dialog__scroll">' +
+      '<div class="lamparadio-presets-dialog__items"></div>' +
+      '</div>' +
+      '</div>' +
+      '</div>');
+
+    // CSS стили
     Lampa.Template.add('lamparadio_style', '<style>' +
       '.radio-genres { display: flex; flex-wrap: wrap; padding: 1em; gap: 0.5em; justify-content: center; }' +
       '.radio-genre { padding: 0.3em 0.8em; border-radius: 0.3em; background: rgba(255,255,255,0.1); cursor: pointer; font-size: 0.9em; }' +
@@ -1626,14 +1776,24 @@
       '.lamparadio-info-support__footer { font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: 1em; }' +
       '.lamparadio-hide-logo { display: none !important; }' +
       '.lamparadio-hide-marquee { display: none !important; }' +
-      '.lamparadio-presets-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 10px; }' +
-      '.lamparadio-preset { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }' +
-      '.lamparadio-preset:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }' +
-      '.lamparadio-preset.active { border-color: #4CAF50; background: rgba(76, 175, 80, 0.1); }' +
-      '.lamparadio-preset__color { width: 100%; height: 30px; border-radius: 4px; margin-bottom: 8px; }' +
-      '.lamparadio-preset__name { font-size: 0.9em; text-align: center; color: #fff; }' +
-      '@media screen and (max-width: 580px) { .lamparadio-presets-container { grid-template-columns: repeat(2, 1fr); } .lamparadio-item { width: 21%; } }' +
-      '@media screen and (max-width: 385px) { .lamparadio-presets-container { grid-template-columns: 1fr; } .lamparadio-item__name { display: none; } .lamparadio-item__favorite { width: 1em; height: 1em; } }' +
+      '.lamparadio-current-preset { margin-top: 5px; padding: 5px 10px; background: rgba(255,255,255,0.1); border-radius: 5px; font-size: 0.9em; }' +
+      '.lamparadio-presets-dialog { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 2000; }' +
+      '.lamparadio-presets-dialog__content { background: #2a2a2a; padding: 2em; border-radius: 0.8em; min-width: 500px; max-width: 90%; max-height: 90%; display: flex; flex-direction: column; }' +
+      '.lamparadio-presets-dialog__title { font-size: 1.8em; margin-bottom: 1em; text-align: center; color: #fff; font-weight: 500; flex-shrink: 0; }' +
+      '.lamparadio-presets-dialog__scroll { flex-grow: 1; overflow-y: auto; overflow-x: hidden; max-height: 70vh; padding-right: 10px; }' +
+      '.lamparadio-presets-dialog__items { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 5px; }' +
+      '.lamparadio-presets-dialog__item { padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; border: 3px solid transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; }' +
+      '.lamparadio-presets-dialog__item:hover, .lamparadio-presets-dialog__item.focus { background: rgba(255,255,255,0.2); transform: translateY(-5px); border-color: #4CAF50; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }' +
+      '.lamparadio-presets-dialog__item.active { border-color: #4CAF50; background: rgba(76, 175, 80, 0.15); box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); }' +
+      '.lamparadio-presets-dialog__item-color { width: 80px; height: 80px; border-radius: 15px; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }' +
+      '.lamparadio-presets-dialog__item-name { font-size: 1.1em; color: #fff; text-align: center; font-weight: 500; }' +
+      '.lamparadio-presets-dialog__scroll::-webkit-scrollbar { width: 8px; }' +
+      '.lamparadio-presets-dialog__scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.1); border-radius: 4px; }' +
+      '.lamparadio-presets-dialog__scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }' +
+      '.lamparadio-presets-dialog__scroll::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }' +
+      '@media screen and (max-width: 768px) { .lamparadio-presets-dialog__content { min-width: 400px; padding: 1.5em; } .lamparadio-presets-dialog__items { grid-template-columns: repeat(2, 1fr); gap: 15px; } .lamparadio-presets-dialog__item { padding: 15px; min-height: 110px; } .lamparadio-presets-dialog__item-color { width: 60px; height: 60px; } }' +
+      '@media screen and (max-width: 580px) { .lamparadio-presets-dialog__content { min-width: 300px; padding: 1em; } .lamparadio-presets-dialog__items { grid-template-columns: repeat(2, 1fr); gap: 10px; } .lamparadio-presets-dialog__item { padding: 12px; min-height: 100px; } .lamparadio-presets-dialog__item-color { width: 50px; height: 50px; } .lamparadio-item { width: 21%; } }' +
+      '@media screen and (max-width: 385px) { .lamparadio-presets-dialog__items { grid-template-columns: 1fr; } .lamparadio-presets-dialog__item { padding: 15px; min-height: 90px; } .lamparadio-presets-dialog__item-color { width: 40px; height: 40px; } .lamparadio-item__name { display: none; } .lamparadio-item__favorite { width: 1em; height: 1em; } }' +
       '.lamparadio-player { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em; padding: 0.2em 0.4em; margin-left: 0.5em; margin-right: 0.5em; }' +
       '.lamparadio-player__name { margin-right: 0.35em; white-space: nowrap; overflow: hidden; -o-text-overflow: ellipsis; text-overflow: ellipsis; max-width: 8em; display: none; }' +
       '.lamparadio-player__button { position: relative; width: 2em; height: 2em; display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; -moz-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-flex-shrink: 0; -ms-flex-negative: 0; flex-shrink: 0; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em; border: 0.15em solid rgba(255, 255, 255, 1); }' +
