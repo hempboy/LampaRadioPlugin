@@ -26,6 +26,114 @@
   var DEFAULT_ANALYZER_BG_COLOR = 'rgba(0, 0, 0, 0)';
   var DEFAULT_ANALYZER_OPACITY = 0.7;
 
+  // Пресеты цветовых гамм
+  var COLOR_PRESETS = [
+    {
+      id: 'fire',
+      name: '🔥 Огненная',
+      color: '#FF5722',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.7,
+      glow: true
+    },
+    {
+      id: 'ocean',
+      name: '🌊 Океан',
+      color: '#2196F3',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.6,
+      glow: true
+    },
+    {
+      id: 'forest',
+      name: '🌿 Лесная',
+      color: '#4CAF50',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.65,
+      glow: false
+    },
+    {
+      id: 'purple',
+      name: '💜 Фиолетовая',
+      color: '#9C27B0',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.7,
+      glow: true
+    },
+    {
+      id: 'sunset',
+      name: '🌅 Закат',
+      color: '#FF9800',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.75,
+      glow: true
+    },
+    {
+      id: 'ice',
+      name: '❄️ Ледяная',
+      color: '#00BCD4',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.6,
+      glow: true
+    },
+    {
+      id: 'gold',
+      name: '⭐ Золотая',
+      color: '#FFC107',
+      bgColor: 'rgba(0, 0, 0, 0.2)',
+      opacity: 0.8,
+      glow: true
+    },
+    {
+      id: 'matrix',
+      name: '🟢 Матрица',
+      color: '#00FF00',
+      bgColor: 'rgba(0, 0, 0, 0.3)',
+      opacity: 0.9,
+      glow: false
+    },
+    {
+      id: 'neon',
+      name: '🌈 Неон',
+      color: '#FF4081',
+      bgColor: 'rgba(0, 0, 0, 0.1)',
+      opacity: 0.85,
+      glow: true
+    },
+    {
+      id: 'cyan',
+      name: '🔵 Циан',
+      color: '#00E5FF',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.7,
+      glow: true
+    },
+    {
+      id: 'classic',
+      name: '⚫ Классическая',
+      color: '#FFFFFF',
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.5,
+      glow: false
+    },
+    {
+      id: 'rainbow',
+      name: '🌈 Радужная',
+      color: 'rainbow', // Специальный маркер для радужного режима
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.8,
+      glow: true
+    },
+    {
+      id: 'gradient',
+      name: '🎨 Градиент',
+      color: 'gradient', // Специальный маркер для градиентного режима
+      bgColor: 'rgba(0, 0, 0, 0)',
+      opacity: 0.7,
+      glow: false
+    }
+  ];
+
   function getRecentStations() {
     try {
       var recent = Lampa.Storage.get(RECENT_STORAGE_KEY);
@@ -811,6 +919,7 @@
         var analyzerColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
         var analyzerBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
         var analyzerOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+        var analyzerGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
         
         // Парсим цвет в RGB
         var parseColor = function(color) {
@@ -833,7 +942,38 @@
           return {r: 255, g: 87, b: 34}; // оранжевый по умолчанию
         };
         
-        var color = parseColor(analyzerColor);
+        // Функция для получения цвета на основе позиции (для радуги)
+        function getRainbowColor(position) {
+          // position от 0 до 1
+          var hue = position * 360;
+          return 'hsl(' + hue + ', 100%, 50%)';
+        }
+        
+        // Функция для получения градиентного цвета
+        function getGradientColor(position) {
+          // Градиент от синего через зеленый к красному
+          var colors = [
+            {r: 0, g: 150, b: 255},   // синий
+            {r: 0, g: 255, b: 150},   // бирюзовый
+            {r: 0, g: 255, b: 0},     // зеленый
+            {r: 255, g: 255, b: 0},   // желтый
+            {r: 255, g: 100, b: 0},   // оранжевый
+            {r: 255, g: 0, b: 0}      // красный
+          ];
+          
+          var index = Math.floor(position * (colors.length - 1));
+          var nextIndex = Math.min(index + 1, colors.length - 1);
+          var progress = (position * (colors.length - 1)) - index;
+          
+          var color1 = colors[index];
+          var color2 = colors[nextIndex];
+          
+          var r = Math.round(color1.r + (color2.r - color1.r) * progress);
+          var g = Math.round(color1.g + (color2.g - color1.g) * progress);
+          var b = Math.round(color1.b + (color2.b - color1.b) * progress);
+          
+          return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
         
         function renderFrame() {
           getFreqData(played);
@@ -854,24 +994,49 @@
             // Динамическая прозрачность на основе высоты столбца
             var dynamicOpacity = (_freq[i] / 255) * analyzerOpacity;
             
-            // Градиент для столбцов
-            var gradient = ctx.createLinearGradient(x, HEIGHT - barHeight, x, HEIGHT);
-            gradient.addColorStop(0, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')');
-            gradient.addColorStop(1, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + (dynamicOpacity * 0.3) + ')');
+            // Определяем цвет в зависимости от режима
+            var currentColor;
+            if (analyzerColor === 'rainbow') {
+              // Радужный режим
+              var position = i / bufferLength;
+              currentColor = getRainbowColor(position);
+              ctx.fillStyle = currentColor;
+            } else if (analyzerColor === 'gradient') {
+              // Градиентный режим
+              var position = i / bufferLength;
+              currentColor = getGradientColor(position);
+              ctx.fillStyle = currentColor;
+            } else {
+              // Обычный цвет
+              var color = parseColor(analyzerColor);
+              // Градиент для столбцов
+              var gradient = ctx.createLinearGradient(x, HEIGHT - barHeight, x, HEIGHT);
+              gradient.addColorStop(0, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')');
+              gradient.addColorStop(1, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + (dynamicOpacity * 0.3) + ')');
+              ctx.fillStyle = gradient;
+            }
             
-            ctx.fillStyle = gradient;
             ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
             
             // Добавляем свечение
-            if (Lampa.Storage.field('lamparadio_analyzer_glow')) {
-              ctx.shadowColor = 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')';
+            if (analyzerGlow) {
+              ctx.shadowColor = analyzerColor === 'rainbow' || analyzerColor === 'gradient' 
+                ? currentColor 
+                : 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')';
               ctx.shadowBlur = 10;
               ctx.shadowOffsetX = 0;
               ctx.shadowOffsetY = 0;
+            } else {
+              ctx.shadowColor = 'transparent';
+              ctx.shadowBlur = 0;
             }
             
             x += barWidth + 4;
           }
+          
+          // Сбрасываем тень после отрисовки всех столбцов
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
           
           requestAnimationFrame(renderFrame);
         }
@@ -1135,6 +1300,74 @@
       onRender: function onRender(item) { }
     });
 
+    // Новая настройка: Пресеты цветов
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_color_presets',
+        type: 'trigger'
+      },
+      field: {
+        name: 'Цветовые пресеты',
+        description: 'Быстрый выбор готовых цветовых схем'
+      },
+      onRender: function onRender(item) {
+        // Скрываем стандартный чекбокс
+        item.find('.settings-param__value').hide();
+        
+        // Создаем контейнер для пресетов
+        var presetsContainer = $('<div class="lamparadio-presets-container"></div>');
+        
+        // Добавляем пресеты
+        COLOR_PRESETS.forEach(function(preset) {
+          var presetElement = $('<div class="lamparadio-preset" data-preset-id="' + preset.id + '">' +
+            '<div class="lamparadio-preset__color" style="background-color: ' + (preset.color === 'rainbow' ? 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)' : preset.color === 'gradient' ? 'linear-gradient(90deg, blue, green, yellow, orange, red)' : preset.color) + '"></div>' +
+            '<div class="lamparadio-preset__name">' + preset.name + '</div>' +
+            '</div>');
+          
+          presetElement.on('click', function() {
+            // Применяем пресет
+            applyPreset(preset);
+            
+            // Подсвечиваем выбранный пресет
+            presetsContainer.find('.lamparadio-preset').removeClass('active');
+            $(this).addClass('active');
+            
+            // Показываем уведомление
+            Lampa.Noty.show('Пресет "' + preset.name + '" применен');
+            
+            // Обновляем остальные настройки цветов, если они уже отображены
+            updateColorSettings(preset);
+          });
+          
+          presetsContainer.append(presetElement);
+        });
+        
+        // Проверяем, какой пресет сейчас активен
+        var currentColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
+        var currentBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
+        var currentOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+        var currentGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
+        
+        // Ищем совпадение с пресетами
+        var matchingPreset = COLOR_PRESETS.find(function(preset) {
+          return preset.color === currentColor && 
+                 preset.bgColor === currentBgColor && 
+                 Math.abs(preset.opacity - currentOpacity) < 0.01 &&
+                 preset.glow === currentGlow;
+        });
+        
+        // Если нашли совпадение, подсвечиваем пресет
+        if (matchingPreset) {
+          setTimeout(function() {
+            presetsContainer.find('.lamparadio-preset[data-preset-id="' + matchingPreset.id + '"]').addClass('active');
+          }, 100);
+        }
+        
+        item.find('.settings-param__descr').append(presetsContainer);
+      }
+    });
+
     // Новая настройка: Цвет визуализатора
     Lampa.SettingsApi.addParam({
       component: 'lamparadio',
@@ -1262,12 +1495,33 @@
     });
   }
 
+  // Функция для применения пресета
+  function applyPreset(preset) {
+    Lampa.Storage.set('lamparadio_analyzer_color', preset.color);
+    Lampa.Storage.set('lamparadio_analyzer_bg_color', preset.bgColor);
+    Lampa.Storage.set('lamparadio_analyzer_opacity', preset.opacity.toString());
+    Lampa.Storage.set('lamparadio_analyzer_glow', preset.glow);
+  }
+
+  // Функция для обновления настроек цветов
+  function updateColorSettings(preset) {
+    // Находим элементы настроек и обновляем их значения
+    $('.settings-param[data-param="lamparadio_analyzer_color"] input').val(preset.color);
+    $('.settings-param[data-param="lamparadio_analyzer_bg_color"] input').val(preset.bgColor);
+    $('.settings-param[data-param="lamparadio_analyzer_opacity"] input').val(preset.opacity.toString());
+    
+    var glowCheckbox = $('.settings-param[data-param="lamparadio_analyzer_glow"] input[type="checkbox"]');
+    if (glowCheckbox.length) {
+      glowCheckbox.prop('checked', preset.glow);
+    }
+  }
+
   function createRadio() {
     window.plugin_lamparadio_ready = true;
 
     var manifest = {
       type: 'audio',
-      version: '1.3.0',
+      version: '1.4.0',
       name: 'Радио',
       description: 'Коллекция радиостанций с избранным и историей прослушивания',
       component: 'lamparadio'
@@ -1348,8 +1602,14 @@
       '.lamparadio-info-support__footer { font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: 1em; }' +
       '.lamparadio-hide-logo { display: none !important; }' +
       '.lamparadio-hide-marquee { display: none !important; }' +
-      '@media screen and (max-width: 580px) { .lamparadio-item { width: 21%; } }' +
-      '@media screen and (max-width: 385px) { .lamparadio-item__name { display: none; } .lamparadio-item__favorite { width: 1em; height: 1em; } }' +
+      '.lamparadio-presets-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin-top: 10px; }' +
+      '.lamparadio-preset { background: rgba(255,255,255,0.1); border-radius: 8px; padding: 10px; cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }' +
+      '.lamparadio-preset:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }' +
+      '.lamparadio-preset.active { border-color: #4CAF50; background: rgba(76, 175, 80, 0.1); }' +
+      '.lamparadio-preset__color { width: 100%; height: 30px; border-radius: 4px; margin-bottom: 8px; }' +
+      '.lamparadio-preset__name { font-size: 0.9em; text-align: center; color: #fff; }' +
+      '@media screen and (max-width: 580px) { .lamparadio-presets-container { grid-template-columns: repeat(2, 1fr); } .lamparadio-item { width: 21%; } }' +
+      '@media screen and (max-width: 385px) { .lamparadio-presets-container { grid-template-columns: 1fr; } .lamparadio-item__name { display: none; } .lamparadio-item__favorite { width: 1em; height: 1em; } }' +
       '.lamparadio-player { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em; padding: 0.2em 0.4em; margin-left: 0.5em; margin-right: 0.5em; }' +
       '.lamparadio-player__name { margin-right: 0.35em; white-space: nowrap; overflow: hidden; -o-text-overflow: ellipsis; text-overflow: ellipsis; max-width: 8em; display: none; }' +
       '.lamparadio-player__button { position: relative; width: 2em; height: 2em; display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-box-pack: center; -webkit-justify-content: center; -moz-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-flex-shrink: 0; -ms-flex-negative: 0; flex-shrink: 0; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em; border: 0.15em solid rgba(255, 255, 255, 1); }' +
