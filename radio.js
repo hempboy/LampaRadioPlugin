@@ -20,6 +20,11 @@
   // Хранилища
   var RECENT_STORAGE_KEY = 'lamparadio_recent_stations';
   var FAVORITES_STORAGE_KEY = 'lamparadio_favorite_stations';
+  
+  // Цвета визуализатора по умолчанию
+  var DEFAULT_ANALYZER_COLOR = '#FF5722';
+  var DEFAULT_ANALYZER_BG_COLOR = 'rgba(0, 0, 0, 0)';
+  var DEFAULT_ANALYZER_OPACITY = 0.7;
 
   function getRecentStations() {
     try {
@@ -802,20 +807,72 @@
         var barHeight;
         var x = 0;
         
+        // Получаем настройки цветов
+        var analyzerColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
+        var analyzerBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
+        var analyzerOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+        
+        // Парсим цвет в RGB
+        var parseColor = function(color) {
+          if (color.startsWith('#')) {
+            var r = parseInt(color.slice(1, 3), 16);
+            var g = parseInt(color.slice(3, 5), 16);
+            var b = parseInt(color.slice(5, 7), 16);
+            return {r: r, g: g, b: b};
+          } else if (color.startsWith('rgb')) {
+            var match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+            if (match) {
+              return {
+                r: parseInt(match[1]),
+                g: parseInt(match[2]),
+                b: parseInt(match[3]),
+                a: match[4] ? parseFloat(match[4]) : 1
+              };
+            }
+          }
+          return {r: 255, g: 87, b: 34}; // оранжевый по умолчанию
+        };
+        
+        var color = parseColor(analyzerColor);
+        
         function renderFrame() {
           getFreqData(played);
+          
+          // Очищаем canvas с фоном
           ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Заливаем фон, если задан
+          if (analyzerBgColor !== 'rgba(0, 0, 0, 0)') {
+            ctx.fillStyle = analyzerBgColor;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
+          
           x = 0;
           for (var i = 0; i < bufferLength; i++) {
             barHeight = _freq[i] * 2;
-            var r = 255;
-            var g = 255;
-            var b = 255;
-            var opacity = _freq[i] / 510;
-            ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + opacity + ")";
+            
+            // Динамическая прозрачность на основе высоты столбца
+            var dynamicOpacity = (_freq[i] / 255) * analyzerOpacity;
+            
+            // Градиент для столбцов
+            var gradient = ctx.createLinearGradient(x, HEIGHT - barHeight, x, HEIGHT);
+            gradient.addColorStop(0, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')');
+            gradient.addColorStop(1, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + (dynamicOpacity * 0.3) + ')');
+            
+            ctx.fillStyle = gradient;
             ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            
+            // Добавляем свечение
+            if (Lampa.Storage.field('lamparadio_analyzer_glow')) {
+              ctx.shadowColor = 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')';
+              ctx.shadowBlur = 10;
+              ctx.shadowOffsetX = 0;
+              ctx.shadowOffsetY = 0;
+            }
+            
             x += barWidth + 4;
           }
+          
           requestAnimationFrame(renderFrame);
         }
         renderFrame();
@@ -1078,6 +1135,76 @@
       onRender: function onRender(item) { }
     });
 
+    // Новая настройка: Цвет визуализатора
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_analyzer_color',
+        type: 'string',
+        "default": DEFAULT_ANALYZER_COLOR
+      },
+      field: {
+        name: 'Цвет визуализатора',
+        description: 'Цвет в формате HEX (#FF5722) или RGB (rgb(255,87,34))'
+      },
+      onRender: function onRender(item) {
+        // Добавляем подсказку о формате цвета
+        var description = item.find('.settings-param__descr');
+        description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Примеры: #FF5722 (оранжевый), #2196F3 (синий), #4CAF50 (зеленый), #FF4081 (розовый)</div>');
+      }
+    });
+
+    // Новая настройка: Цвет фона визуализатора
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_analyzer_bg_color',
+        type: 'string',
+        "default": DEFAULT_ANALYZER_BG_COLOR
+      },
+      field: {
+        name: 'Фон визуализатора',
+        description: 'Цвет фона в формате rgba (например, rgba(0,0,0,0.3))'
+      },
+      onRender: function onRender(item) {
+        var description = item.find('.settings-param__descr');
+        description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Прозрачный фон: rgba(0,0,0,0), Чёрный: rgba(0,0,0,0.3)</div>');
+      }
+    });
+
+    // Новая настройка: Прозрачность визуализатора
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_analyzer_opacity',
+        type: 'string',
+        "default": DEFAULT_ANALYZER_OPACITY.toString()
+      },
+      field: {
+        name: 'Прозрачность визуализатора',
+        description: 'Значение от 0.1 (почти прозрачно) до 1 (непрозрачно)'
+      },
+      onRender: function onRender(item) {
+        var description = item.find('.settings-param__descr');
+        description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Рекомендуется: 0.3-0.8</div>');
+      }
+    });
+
+    // Новая настройка: Эффект свечения
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_analyzer_glow',
+        type: 'trigger',
+        "default": false
+      },
+      field: {
+        name: 'Эффект свечения',
+        description: 'Добавить свечение к столбцам визуализатора'
+      },
+      onRender: function onRender(item) { }
+    });
+
     // Новая настройка: скрыть логотип станции
     Lampa.SettingsApi.addParam({
       component: 'lamparadio',
@@ -1140,7 +1267,7 @@
 
     var manifest = {
       type: 'audio',
-      version: '1.2.0',
+      version: '1.3.0',
       name: 'Радио',
       description: 'Коллекция радиостанций с избранным и историей прослушивания',
       component: 'lamparadio'
