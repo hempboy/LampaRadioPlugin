@@ -69,6 +69,14 @@
       glow: true
     },
     {
+      id: 'dawn',
+      name: '🌅 Рассвет',
+      color: '#FF4500',
+      bgColor: 'rgba(255, 140, 0, 0.1)',
+      opacity: 0.8,
+      glow: true
+    },
+    {
       id: 'ice',
       name: '❄️ Ледяная',
       color: '#00BCD4',
@@ -117,11 +125,27 @@
       glow: false
     },
     {
+      id: 'music',
+      name: '🎵 Музыкальная',
+      color: '#8A2BE2',
+      bgColor: 'rgba(0, 0, 0, 0.1)',
+      opacity: 0.75,
+      glow: true
+    },
+    {
       id: 'rainbow',
-      name: '🌈 Радужная',
+      name: '🌈 Радуга',
       color: 'rainbow', // Специальный маркер для радужного режима
       bgColor: 'rgba(0, 0, 0, 0)',
       opacity: 0.8,
+      glow: true
+    },
+    {
+      id: 'night',
+      name: '🌃 Ночная',
+      color: '#1E90FF',
+      bgColor: 'rgba(0, 20, 40, 0.3)',
+      opacity: 0.7,
       glow: true
     },
     {
