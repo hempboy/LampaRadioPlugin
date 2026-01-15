@@ -13,14 +13,38 @@
   var _events = {};
   var _component;
   var played = false;
+  
+  // Визуализатор
+  var _visualizer = {
+    canvas: null,
+    ctx: null,
+    animationId: null,
+    isActive: false,
+    container: null
+  };
 
   // Константы
   var MAX_RECENT_STATIONS = 14;
+  var ANALYSER_FFT_SIZE = 2048; // Увеличили для лучшего качества
   
   // Хранилища
   var RECENT_STORAGE_KEY = 'lamparadio_recent_stations';
   var FAVORITES_STORAGE_KEY = 'lamparadio_favorite_stations';
   
+  // Кэши
+  var _cachedFavorites = null;
+  var _cachedRecent = null;
+  var _cachedStations = null;
+  
+  // Оптимизация: дебаунсер для частых операций
+  var _debounceTimers = {};
+  function debounce(key, fn, delay) {
+    if (_debounceTimers[key]) {
+      clearTimeout(_debounceTimers[key]);
+    }
+    _debounceTimers[key] = setTimeout(fn, delay);
+  }
+
   // Цвета визуализатора по умолчанию
   var DEFAULT_ANALYZER_COLOR = '#FF5722';
   var DEFAULT_ANALYZER_BG_COLOR = 'rgba(0, 0, 0, 0)';
@@ -158,11 +182,24 @@
     }
   ];
 
+  // Функции для кэширования данных
+  function getCachedStations() {
+    return _cachedStations;
+  }
+
+  function setCachedStations(stations) {
+    _cachedStations = stations;
+  }
+
   function getRecentStations() {
+    if (_cachedRecent !== null) return _cachedRecent;
+    
     try {
       var recent = Lampa.Storage.get(RECENT_STORAGE_KEY);
-      return Array.isArray(recent) ? recent : [];
+      _cachedRecent = Array.isArray(recent) ? recent : [];
+      return _cachedRecent;
     } catch (e) {
+      _cachedRecent = [];
       return [];
     }
   }
@@ -174,10 +211,14 @@
       // Используем поток в качестве уникального идентификатора
       var stationId = station.stream;
       
-      // Удаляем станцию, если она уже есть в списке
-      recent = recent.filter(function(s) {
-        return s.stream !== stationId;
+      // Оптимизация: используем findIndex для быстрого поиска
+      var index = recent.findIndex(function(s) {
+        return s.stream === stationId;
       });
+      
+      if (index !== -1) {
+        recent.splice(index, 1);
+      }
       
       // Добавляем станцию в начало списка
       recent.unshift({
@@ -199,6 +240,7 @@
       }
       
       Lampa.Storage.set(RECENT_STORAGE_KEY, recent);
+      _cachedRecent = recent; // Обновляем кэш
       return recent;
     } catch (e) {
       console.error('Error saving recent station:', e);
@@ -208,10 +250,14 @@
 
   // Функции для избранных станций
   function getFavoriteStations() {
+    if (_cachedFavorites !== null) return _cachedFavorites;
+    
     try {
       var favorites = Lampa.Storage.get(FAVORITES_STORAGE_KEY);
-      return Array.isArray(favorites) ? favorites : [];
+      _cachedFavorites = Array.isArray(favorites) ? favorites : [];
+      return _cachedFavorites;
     } catch (e) {
+      _cachedFavorites = [];
       return [];
     }
   }
@@ -243,6 +289,13 @@
         });
         
         Lampa.Storage.set(FAVORITES_STORAGE_KEY, favorites);
+        _cachedFavorites = favorites; // Обновляем кэш
+        
+        // Дебаунсим уведомление
+        debounce('favorite_notify', function() {
+          Lampa.Noty.show('Станция добавлена в избранное');
+        }, 100);
+        
         return true;
       }
       return false;
@@ -267,6 +320,13 @@
       
       if (favorites.length !== initialLength) {
         Lampa.Storage.set(FAVORITES_STORAGE_KEY, favorites);
+        _cachedFavorites = favorites; // Обновляем кэш
+        
+        // Дебаунсим уведомление
+        debounce('favorite_notify', function() {
+          Lampa.Noty.show('Станция удалена из избранного');
+        }, 100);
+        
         return true;
       }
       return false;
@@ -292,34 +352,59 @@
   // setup audio routing, called after user interaction, setup once
   function setupAudio() {
     if (_audio && _context) return;
-    _audio = new Audio();
-    _context = new (window.AudioContext || window.webkitAudioContext)();
-    _source = _context.createMediaElementSource(_audio);
-    _analyser = _context.createAnalyser();
-    _gain = _context.createGain();
-    _analyser.fftSize = 1024;
-    _source.connect(_analyser);
-    _source.connect(_gain);
-    _gain.connect(_context.destination);
-    _audio.addEventListener('canplay', function (e) {
-      console.log('Radio', 'got canplay');
-      _freq = new Uint8Array(_analyser.frequencyBinCount);
-      _audio.play();
-    });
-    // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio#events
-    ['play', 'waiting', 'playing', 'ended', 'stalled', 'suspend'].forEach(function (event) {
-      _audio.addEventListener(event, function (e) {
-        return emit(event, e);
+    
+    try {
+      _audio = new Audio();
+      _context = new (window.AudioContext || window.webkitAudioContext)();
+      _source = _context.createMediaElementSource(_audio);
+      _analyser = _context.createAnalyser();
+      _gain = _context.createGain();
+      
+      // Улучшенные настройки для лучшего качества
+      _analyser.fftSize = ANALYSER_FFT_SIZE;
+      _analyser.smoothingTimeConstant = 0.8;
+      _analyser.minDecibels = -90;
+      _analyser.maxDecibels = -10;
+      
+      _source.connect(_analyser);
+      _source.connect(_gain);
+      _gain.connect(_context.destination);
+      
+      _audio.addEventListener('canplay', function (e) {
+        console.log('Radio', 'got canplay');
+        _freq = new Uint8Array(_analyser.frequencyBinCount);
+        _audio.play();
       });
-    });
+      
+      // Оптимизация: один обработчик для всех событий
+      ['play', 'waiting', 'playing', 'ended', 'stalled', 'suspend'].forEach(function (event) {
+        _audio.addEventListener(event, function (e) {
+          return emit(event, e);
+        }, { passive: true });
+      });
+      
+      // Приостанавливаем контекст до начала воспроизведения
+      if (_context.state === 'running') {
+        _context.suspend().catch(function() {});
+      }
+    } catch (e) {
+      console.error('Audio initialization error:', e);
+    }
   }
+  
   // emit saved audio event
   function emit(event, data) {
     if (event && _events.hasOwnProperty(event)) {
-      console.log('Radio', 'emit', event);
-      _events[event].map(function (fn) { fn(data) });
+      _events[event].forEach(function (fn) { 
+        try {
+          fn(data);
+        } catch (err) {
+          console.error('Event handler error:', err);
+        }
+      });
     }
   }
+  
   // add event listeners to the audio api
   function on(event, callback) {
     if (event && typeof callback === 'function') {
@@ -327,123 +412,410 @@
       _events[event].push(callback);
     }
   }
+  
   // stop playing audio
   function stopAudio() {
     if (!_audio) return;
+    
     try {
       _audio.pause();
-    } catch (e) { }
-    try {
-      _audio.stop();
-    } catch (e) { }
-    try {
-      _audio.close();
-    } catch (e) { }
+      _audio.src = '';
+      _audio.load(); // Очищаем буфер
+    } catch (e) { 
+      console.error('Error stopping audio:', e);
+    }
+    
+    // Приостанавливаем аудиоконтекст для экономии ресурсов
+    if (_context && _context.state !== 'closed') {
+      _context.suspend().catch(function() {});
+    }
+    
+    // Сбрасываем состояние
+    played = false;
+    _hasfreq = false;
+    _counter = 0;
+    
+    // Останавливаем визуализатор
+    stopVisualizer();
   }
+  
   // set audio volume
   function setVolume(volume) {
     if (!_gain) return;
-    volume = parseFloat(volume) || 0;
-    volume = volume > 1 ? volume / 100 : volume;
-    volume = volume > 1 ? 1 : volume;
-    volume = volume < 0 ? 0 : volume;
-    _audio.muted = volume <= 0 ? true : false;
-    _gain.gain.value = volume;
+    
+    try {
+      volume = parseFloat(volume) || 0;
+      volume = volume > 1 ? volume / 100 : volume;
+      volume = Math.max(0, Math.min(1, volume)); // clamp 0-1
+      
+      _audio.muted = volume <= 0;
+      
+      // Плавное изменение громкости
+      var currentTime = _context.currentTime;
+      _gain.gain.cancelScheduledValues(currentTime);
+      _gain.gain.setValueAtTime(_gain.gain.value, currentTime);
+      _gain.gain.linearRampToValueAtTime(volume, currentTime + 0.1);
+    } catch (e) {
+      console.error('Volume set error:', e);
+    }
   }
+  
   // update and return analyser frequency value [0-1] to control animations
-  function getFreqData(playing) {
-    if (!_analyser) return 0;
+  function getFreqData() {
+    if (!_analyser || !played) return 0;
 
-    _analyser.getByteFrequencyData(_freq);
-    var freq = Math.floor(_freq[4] | 0) / 255;
+    try {
+      _analyser.getByteFrequencyData(_freq);
+      
+      // Берем среднее значение по низким частотам (лучше для визуализации)
+      var sum = 0;
+      var count = Math.min(32, _freq.length); // Только низкие частоты
+      
+      for (var i = 0; i < count; i++) {
+        sum += _freq[i];
+      }
+      
+      var freq = sum / count / 255;
+      
+      if (!_hasfreq && freq > 0.05) {
+        _hasfreq = true;
+      }
 
-    if (!_hasfreq && freq) {
-      _hasfreq = true;
+      if (_hasfreq) return Math.max(freq, 0.1); // Минимальное значение для видимости
+      
+      // Плавная анимация при отсутствии данных
+      if (played) {
+        _counter = Math.min(_counter + 0.01, 0.3);
+      } else {
+        _counter = Math.max(_counter - 0.01, 0);
+      }
+      return _counter;
+    } catch (e) {
+      return 0;
     }
-
-    if (_hasfreq) return freq;
-
-    if (played) {
-      _counter = _counter < .6 ? _counter + .01 : _counter;
-    } else {
-      _counter = _counter > 0 ? _counter - .01 : _counter;
-    }
-    return _counter;
   }
 
-  // parse channels list from api response
-  function parseChannels(channels) {
-    var output = [];
-    if (Array.isArray(channels)) {
-      for (var key in channels) {
-        var channel = channels[key];
-        if (!channel.title || !channel.stream) continue;
-        
-        // Generate a unique ID for the channel
-        channel.id = Lampa.Utils.hash(channel.title + channel.stream);
-        channel.largeimage = channel.logo || IMG_BG;
-        channel.image = channel.logo || IMG_BG;
-        channel.active = false;
-        channel.genre = channel.genre || 'MISCELLANEOUS';
-        channel.description = channel.description || '';
-        channel.originalGenre = channel.genre; // Keep original for filtering
-        
-        output.push(channel);
+  // Функция для парсинга цветов
+  function parseColor(color) {
+    if (color.startsWith('#')) {
+      var r = parseInt(color.slice(1, 3), 16);
+      var g = parseInt(color.slice(3, 5), 16);
+      var b = parseInt(color.slice(5, 7), 16);
+      return {r: r, g: g, b: b};
+    } else if (color.startsWith('rgb')) {
+      var match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
+      if (match) {
+        return {
+          r: parseInt(match[1]),
+          g: parseInt(match[2]),
+          b: parseInt(match[3])
+        };
       }
     }
-    return output;
+    return {r: 255, g: 87, b: 34}; // оранжевый по умолчанию
   }
 
-  function item(data) {
-    var item = Lampa.Template.get('lamparadio_item', {
-      id: data.id,
-      name: data.title
-    });
-    var img = item.find('img')[0];
-    img.onerror = function () {
-      img.src = './img/img_broken.svg';
-    };
-    img.src = data.largeimage;
+  // Функции для управления визуализатором
+  function initVisualizer() {
+    if (!_visualizer.container) {
+      // Создаем контейнер для визуализатора
+      _visualizer.container = $('<div class="lamparadio-visualizer-container"></div>');
+      _visualizer.canvas = $('<canvas class="lamparadio-visualizer"></canvas>')[0];
+      _visualizer.container.append(_visualizer.canvas);
+      $('body').append(_visualizer.container);
+      
+      _visualizer.ctx = _visualizer.canvas.getContext("2d");
+      
+      // Добавляем стили для визуализатора
+      if (!$('#lamparadio-visualizer-styles').length) {
+        $('head').append('<style id="lamparadio-visualizer-styles">' +
+          '.lamparadio-visualizer-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; pointer-events: none; display: block !important; }' +
+          '.lamparadio-visualizer { width: 100%; height: 100%; display: block !important; }' +
+          '.lamparadio-hide-visualizer { display: none !important; }' +
+          '</style>');
+      }
+      
+      updateVisualizer();
+      resizeVisualizer();
+      
+      // Обработчик изменения размера окна
+      $(window).on('resize', resizeVisualizer);
+    }
+  }
+
+  function resizeVisualizer() {
+    if (_visualizer.canvas && _visualizer.container && _visualizer.container.is(':visible')) {
+      _visualizer.canvas.width = window.innerWidth;
+      _visualizer.canvas.height = window.innerHeight;
+    }
+  }
+
+  function updateVisualizer() {
+    var showAnalyzer = Lampa.Storage.field('lamparadio_show_analyzer');
     
-    // Добавляем иконку избранного ТОЛЬКО если станция уже в избранном
+    if (showAnalyzer && _visualizer.container) {
+      _visualizer.container.removeClass('lamparadio-hide-visualizer');
+      startVisualizer();
+    } else if (_visualizer.container) {
+      _visualizer.container.addClass('lamparadio-hide-visualizer');
+      stopVisualizer();
+    }
+  }
+
+  function startVisualizer() {
+    if (_visualizer.animationId || !_visualizer.ctx || !_visualizer.canvas) {
+      return;
+    }
+    
+    _visualizer.isActive = true;
+    var requestFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+    
+    function renderFrame() {
+      if (!_visualizer.isActive || !_visualizer.ctx || !_visualizer.canvas) {
+        stopVisualizer();
+        return;
+      }
+      
+      try {
+        var width = _visualizer.canvas.width;
+        var height = _visualizer.canvas.height;
+        
+        // Очищаем canvas
+        _visualizer.ctx.clearRect(0, 0, width, height);
+        
+        var showAnalyzer = Lampa.Storage.field('lamparadio_show_analyzer');
+        if (!showAnalyzer || !_analyser || !played) {
+          _visualizer.animationId = requestFrame(renderFrame);
+          return;
+        }
+        
+        // Получаем данные частот
+        _analyser.getByteFrequencyData(_freq);
+        
+        // Настройки визуализатора
+        var bufferLength = _analyser.frequencyBinCount;
+        var barWidth = (width / bufferLength) * 2.5;
+        var barHeight;
+        var x = 0;
+        
+        // Получаем настройки цветов
+        var analyzerColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
+        var analyzerBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
+        var analyzerOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+        var analyzerGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
+        
+        // Рисуем фон если нужно
+        if (analyzerBgColor !== 'rgba(0, 0, 0, 0)') {
+          _visualizer.ctx.fillStyle = analyzerBgColor;
+          _visualizer.ctx.fillRect(0, 0, width, height);
+        }
+        
+        // Оптимизация: отрисовываем только видимые столбцы
+        var maxBars = Math.min(bufferLength, Math.floor(width / (barWidth + 1)));
+        
+        for (var i = 0; i < maxBars; i++) {
+          barHeight = (_freq[i] / 255) * height * 0.8;
+          
+          // Динамическая прозрачность на основе высоты столбца
+          var dynamicOpacity = (_freq[i] / 255) * analyzerOpacity;
+          
+          // Определяем цвет в зависимости от режима
+          if (analyzerColor === 'rainbow') {
+            // Радужный режим
+            var hue = (i / maxBars) * 360;
+            _visualizer.ctx.fillStyle = 'hsla(' + hue + ', 100%, 50%, ' + dynamicOpacity + ')';
+          } else if (analyzerColor === 'gradient') {
+            // Градиентный режим
+            var position = i / maxBars;
+            var colors = [
+              {r: 0, g: 150, b: 255},   // синий
+              {r: 0, g: 255, b: 150},   // бирюзовый
+              {r: 0, g: 255, b: 0},     // зеленый
+              {r: 255, g: 255, b: 0},   // желтый
+              {r: 255, g: 100, b: 0},   // оранжевый
+              {r: 255, g: 0, b: 0}      // красный
+            ];
+            
+            var index = Math.floor(position * (colors.length - 1));
+            var nextIndex = Math.min(index + 1, colors.length - 1);
+            var progress = (position * (colors.length - 1)) - index;
+            
+            var color1 = colors[index];
+            var color2 = colors[nextIndex];
+            
+            var r = Math.round(color1.r + (color2.r - color1.r) * progress);
+            var g = Math.round(color1.g + (color2.g - color1.g) * progress);
+            var b = Math.round(color1.b + (color2.b - color1.b) * progress);
+            
+            _visualizer.ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + dynamicOpacity + ')';
+          } else {
+            // Обычный цвет
+            var color = parseColor(analyzerColor);
+            // Градиент для столбцов
+            var gradient = _visualizer.ctx.createLinearGradient(x, height - barHeight, x, height);
+            gradient.addColorStop(0, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')');
+            gradient.addColorStop(1, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + (dynamicOpacity * 0.3) + ')');
+            _visualizer.ctx.fillStyle = gradient;
+          }
+          
+          // Добавляем свечение
+          if (analyzerGlow) {
+            _visualizer.ctx.shadowColor = analyzerColor === 'rainbow' || analyzerColor === 'gradient' 
+              ? _visualizer.ctx.fillStyle 
+              : 'rgba(255, 87, 34, ' + dynamicOpacity + ')';
+            _visualizer.ctx.shadowBlur = 10;
+            _visualizer.ctx.shadowOffsetX = 0;
+            _visualizer.ctx.shadowOffsetY = 0;
+          }
+          
+          _visualizer.ctx.fillRect(x, height - barHeight, barWidth, barHeight);
+          
+          // Сбрасываем тень
+          if (analyzerGlow) {
+            _visualizer.ctx.shadowColor = 'transparent';
+            _visualizer.ctx.shadowBlur = 0;
+          }
+          
+          x += barWidth + 1;
+        }
+        
+        _visualizer.ctx.globalAlpha = 1.0;
+      } catch (e) {
+        console.error('Visualizer error:', e);
+        stopVisualizer();
+      }
+      
+      if (_visualizer.isActive) {
+        _visualizer.animationId = requestFrame(renderFrame);
+      }
+    }
+    
+    renderFrame();
+  }
+
+  function stopVisualizer() {
+    _visualizer.isActive = false;
+    if (_visualizer.animationId) {
+      var cancelFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame;
+      cancelFrame(_visualizer.animationId);
+      _visualizer.animationId = null;
+    }
+    
+    if (_visualizer.ctx && _visualizer.canvas) {
+      _visualizer.ctx.clearRect(0, 0, _visualizer.canvas.width, _visualizer.canvas.height);
+    }
+  }
+
+  // Оптимизированная функция парсинга каналов
+  function parseChannels(channels) {
+    if (!Array.isArray(channels) || channels.length === 0) {
+      return [];
+    }
+    
+    var output = new Array(channels.length);
+    var hashCache = {};
+    
+    for (var i = 0; i < channels.length; i++) {
+      var channel = channels[i];
+      if (!channel.title || !channel.stream) continue;
+      
+      // Кэшируем хэши для одинаковых названий
+      var hashKey = channel.title + channel.stream;
+      if (!hashCache[hashKey]) {
+        hashCache[hashKey] = Lampa.Utils.hash(hashKey);
+      }
+      
+      output[i] = {
+        id: hashCache[hashKey],
+        title: channel.title,
+        stream: channel.stream,
+        logo: channel.logo || IMG_BG,
+        largeimage: channel.logo || IMG_BG,
+        image: channel.logo || IMG_BG,
+        genre: channel.genre || 'MISCELLANEOUS',
+        originalGenre: channel.genre || 'MISCELLANEOUS',
+        description: channel.description || '',
+        active: false
+      };
+    }
+    
+    // Фильтруем undefined элементы
+    return output.filter(function(channel) {
+      return channel !== undefined;
+    });
+  }
+
+  // Оптимизированный компонент элемента станции
+  function RadioItem(data) {
+    var self = this;
+    var element = null;
     var favoriteIcon = null;
-    var updateFavoriteIcon = function() {
+    var img = null;
+    
+    function createElement() {
+      var item = Lampa.Template.get('lamparadio_item', {
+        id: data.id,
+        name: data.title
+      });
+      
+      img = item.find('img')[0];
+      img.onerror = function () {
+        img.src = './img/img_broken.svg';
+      };
+      img.onload = function() {
+        item.addClass('loaded');
+      };
+      img.src = data.largeimage;
+      
+      return item;
+    }
+    
+    function updateFavoriteIcon() {
       var isFavorite = isFavoriteStation(data);
       
       if (isFavorite) {
         if (!favoriteIcon) {
-          // Создаем иконку только если ее нет и станция в избранном
           favoriteIcon = $('<div class="lamparadio-item__favorite"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/></svg></div>');
-          item.append(favoriteIcon);
+          element.append(favoriteIcon);
           favoriteIcon.addClass('active');
         }
-      } else {
-        // Если станция не в избранном, удаляем иконку
-        if (favoriteIcon) {
-          favoriteIcon.remove();
-          favoriteIcon = null;
-        }
+      } else if (favoriteIcon) {
+        favoriteIcon.remove();
+        favoriteIcon = null;
       }
-    };
-    
-    // Обновляем иконку при создании
-    updateFavoriteIcon();
+    }
     
     this.render = function () {
-      return item;
+      if (!element) {
+        element = createElement();
+        updateFavoriteIcon();
+      }
+      return element;
     };
     
     this.updateFavoriteIcon = updateFavoriteIcon;
     
+    this.getData = function() {
+      return data;
+    };
+    
     this.destroy = function () {
-      img.onerror = function () { };
-      img.onload = function () { };
-      img.src = '';
+      if (img) {
+        img.onerror = null;
+        img.onload = null;
+        img.src = '';
+        img = null;
+      }
+      
       if (favoriteIcon) {
         favoriteIcon.remove();
         favoriteIcon = null;
       }
-      item.remove();
+      
+      if (element) {
+        element.remove();
+        element = null;
+      }
     };
   }
 
@@ -454,12 +826,11 @@
       over: true,
       step: 250
     });
-    var player = window.lamparadio_player;
-    var items = [];
+    
     var html = $('<div></div>');
     var body = $('<div class="category-full"></div>');
-    var active;
-    var last;
+    var active = null;
+    var last = null;
     
     // State
     var allStations = [];
@@ -467,6 +838,8 @@
     var currentGenre = null;
     var genres = [];
     var genreFilter = null;
+    var items = [];
+    var stationMap = {}; // Для быстрого поиска станций по ID
 
     _component = this;
 
@@ -478,6 +851,20 @@
       }
     };
 
+    function extractGenres(stations) {
+      var genreSet = new Set();
+      
+      // Оптимизация: используем for loop вместо forEach
+      for (var i = 0; i < stations.length; i++) {
+        var genre = stations[i].originalGenre;
+        if (genre) {
+          genreSet.add(genre);
+        }
+      }
+      
+      genres = Array.from(genreSet).sort();
+    }
+
     function createGenreFilter() {
       genreFilter = $('<div class="radio-genres"></div>');
       
@@ -486,7 +873,7 @@
       genreFilter.append(favoritesBtn);
       
       // Добавляем "Недавно прослушанные" как второй пункт
-      var recentBtn = $('<div class="radio-genre" data-genre="__recent__">Недавно прослушанные</div>');
+      var recentBtn = $('<div class="radio-genre" data-genre="__recent__">Недавние</div>');
       genreFilter.append(recentBtn);
       
       // Затем "Все жанры"
@@ -509,16 +896,6 @@
       html.prepend(genreFilter);
     }
 
-    function extractGenres(stations) {
-      var genreSet = new Set();
-      stations.forEach(function(station) {
-        if (station.originalGenre) {
-          genreSet.add(station.originalGenre);
-        }
-      });
-      genres = Array.from(genreSet).sort();
-    }
-
     function setGenre(genre) {
       if (currentGenre === genre) return;
       
@@ -537,16 +914,18 @@
         // Показываем только избранные станции
         var favoriteStations = getFavoriteStations();
         if (favoriteStations.length > 0) {
-          var favoriteIds = favoriteStations.map(function(s) { return s.stream; });
+          var favoriteIds = {};
+          favoriteStations.forEach(function(s, index) {
+            favoriteIds[s.stream] = index;
+          });
+          
           stations = stations.filter(function(s) {
-            return favoriteIds.includes(s.stream);
+            return favoriteIds.hasOwnProperty(s.stream);
           });
           
           // Сортируем по порядку в favoriteStations
           stations.sort(function(a, b) {
-            var indexA = favoriteIds.indexOf(a.stream);
-            var indexB = favoriteIds.indexOf(b.stream);
-            return indexA - indexB;
+            return favoriteIds[a.stream] - favoriteIds[b.stream];
           });
         } else {
           // Если нет избранных, показываем пустой список
@@ -556,16 +935,18 @@
         // Показываем только недавно прослушанные станции
         var recentStations = getRecentStations();
         if (recentStations.length > 0) {
-          var recentIds = recentStations.map(function(s) { return s.stream; });
+          var recentIds = {};
+          recentStations.forEach(function(s, index) {
+            recentIds[s.stream] = index;
+          });
+          
           stations = stations.filter(function(s) {
-            return recentIds.includes(s.stream);
+            return recentIds.hasOwnProperty(s.stream);
           });
           
           // Сортируем по порядку в recentStations
           stations.sort(function(a, b) {
-            var indexA = recentIds.indexOf(a.stream);
-            var indexB = recentIds.indexOf(b.stream);
-            return indexA - indexB;
+            return recentIds[a.stream] - recentIds[b.stream];
           });
         } else {
           // Если нет недавно прослушанных, показываем пустой список
@@ -582,12 +963,14 @@
       filteredStations = stations;
     }
 
+    // Оптимизированная отрисовка станций
     function renderStations() {
-      // Clear current items
+      // Очищаем существующие элементы
       items.forEach(function(item) {
-        if (item.destroy) item.destroy();
+        item.destroy();
       });
       items = [];
+      stationMap = {};
       body.empty();
       
       if (filteredStations.length === 0) {
@@ -616,24 +999,34 @@
         return;
       }
       
-      // Append stations
-      filteredStations.forEach(function(station) {
-        var item$1 = new item(station);
+      // Используем DocumentFragment для пакетной вставки
+      var fragment = document.createDocumentFragment();
+      
+      filteredStations.forEach(function(station, index) {
+        var item = new RadioItem(station);
+        var element = item.render()[0];
         
-        item$1.render().on('hover:focus', function () {
-          last = item$1.render()[0];
-          active = items.indexOf(item$1);
-          scroll.update(items[active].render(), true);
+        // Сохраняем ссылку для быстрого доступа
+        stationMap[station.id] = {
+          item: item,
+          element: element,
+          index: index
+        };
+        
+        // Вешаем обработчики
+        $(element).on('hover:focus', function () {
+          last = element;
+          active = index;
+          scroll.update(element, true);
         }).on('hover:enter', function () {
-          // Показываем диалог с выбором действия
-          showStationDialog(station, item$1);
+          showStationDialog(station, item);
         });
         
-        body.append(item$1.render());
-        items.push(item$1);
+        fragment.appendChild(element);
+        items.push(item);
       });
       
-      // Добавляем отступ снизу, чтобы видно было названия станций
+      body.append(fragment);
       body.append('<div class="radio-bottom-padding"></div>');
     }
 
@@ -642,7 +1035,7 @@
       
       // Создаем элементы диалога
       var dialogHtml = Lampa.Template.get('lamparadio_dialog', {
-        title: station.title
+        title: station.title.length > 40 ? station.title.substring(0, 40) + '...' : station.title
       });
       
       var itemsContainer = dialogHtml.find('.lamparadio-dialog__items');
@@ -660,9 +1053,17 @@
       
       // Функция закрытия диалога
       var dialogActive = true;
+      var dialogController = null;
+      
       function closeDialog() {
         if (!dialogActive) return;
         dialogActive = false;
+        
+        if (dialogController) {
+          // Вместо Lampa.Controller.remove просто переключаемся на content
+          Lampa.Controller.toggle('content');
+          dialogController = null;
+        }
         
         // Удаляем диалог
         dialogHtml.remove();
@@ -683,7 +1084,6 @@
         switch(action) {
           case 'add':
             if (addFavoriteStation(station)) {
-              Lampa.Noty.show('Станция добавлена в избранное');
               if (itemObj && itemObj.updateFavoriteIcon) {
                 itemObj.updateFavoriteIcon();
               }
@@ -697,7 +1097,6 @@
             
           case 'remove':
             if (removeFavoriteStation(station)) {
-              Lampa.Noty.show('Станция удалена из избранного');
               if (itemObj && itemObj.updateFavoriteIcon) {
                 itemObj.updateFavoriteIcon();
               }
@@ -716,7 +1115,7 @@
               if (window.lamparadio_player && window.lamparadio_player.play) {
                 window.lamparadio_player.play(station);
               }
-            }, 100);
+            }, 50);
             break;
         }
       });
@@ -729,10 +1128,12 @@
       });
       
       // Закрытие по клавише Back
-      var dialogController = {
+      dialogController = {
         toggle: function() {
           Lampa.Controller.collectionSet(dialogHtml);
-          Lampa.Controller.collectionFocus(dialogHtml.find('.lamparadio-dialog__item').first()[0], dialogHtml);
+          var firstItem = dialogHtml.find('.lamparadio-dialog__item').first();
+          Lampa.Controller.collectionFocus(firstItem[0], dialogHtml);
+          firstItem.addClass('focus');
         },
         back: function() {
           closeDialog();
@@ -776,6 +1177,19 @@
       var _this = this;
       this.activity.loader(true);
       
+      // Проверяем кэш
+      var cached = getCachedStations();
+      if (cached && cached.length > 0) {
+        setTimeout(function() {
+          _this.build(cached);
+          _this.activity.loader(false);
+          if (_this.start) {
+            _this.start();
+          }
+        }, 0);
+        return this.render();
+      }
+      
       network.native(API_URL, 
         function (data) {
           try {
@@ -796,6 +1210,7 @@
             '<div class="lamparadio-empty__description">Не удалось загрузить список радиостанций</div>' +
             '</div>');
           html.append(emptyContainer);
+          
           _this.start = function() {
             Lampa.Controller.add('content', {
               toggle: function toggle() {
@@ -818,23 +1233,26 @@
       try {
         scroll.minus();
         
-        // Parse stations
+        var stations = [];
         if (Array.isArray(data)) {
-          allStations = parseChannels(data);
+          stations = parseChannels(data);
         } else if (data && Array.isArray(data.channels)) {
-          allStations = parseChannels(data.channels);
+          stations = parseChannels(data.channels);
         } else if (data && Array.isArray(data.stations)) {
-          allStations = parseChannels(data.stations);
+          stations = parseChannels(data.stations);
         }
         
-        if (allStations.length === 0) {
-          console.warn('No stations found in data');
+        if (stations.length === 0) {
           var emptyContainer = $('<div class="lamparadio-empty">' +
             '<div class="lamparadio-empty__title">Нет доступных станций</div>' +
             '<div class="lamparadio-empty__description">Не удалось загрузить радиостанции</div>' +
             '</div>');
           body.append(emptyContainer);
         } else {
+          // Кэшируем станции
+          setCachedStations(stations);
+          allStations = stations;
+          
           // Extract genres только из основных станций
           extractGenres(allStations);
           
@@ -859,7 +1277,9 @@
       var dialog = $('.lamparadio-dialog');
       if (dialog.length) {
         dialog.remove();
-        Lampa.Controller.remove('lamparadio-dialog');
+        // Не используем Lampa.Controller.remove, так как его может не быть
+        // Просто переключаемся на content контроллер
+        Lampa.Controller.toggle('content');
       }
       Lampa.Activity.backward();
     };
@@ -871,20 +1291,24 @@
     this.start = function () {
       try {
         if (!this.activity || Lampa.Activity.active().activity !== this.activity) return;
+        
         this.background();
+        
         Lampa.Controller.add('content', {
           toggle: function toggle() {
             Lampa.Controller.collectionSet(scroll.render());
             Lampa.Controller.collectionFocus(last || false, scroll.render());
           },
           left: function left() {
-            if (Navigator.canmove('left')) Navigator.move('left'); else Lampa.Controller.toggle('menu');
+            if (Navigator.canmove('left')) Navigator.move('left'); 
+            else Lampa.Controller.toggle('menu');
           },
           right: function right() {
             Navigator.move('right');
           },
           up: function up() {
-            if (Navigator.canmove('up')) Navigator.move('up'); else Lampa.Controller.toggle('head');
+            if (Navigator.canmove('up')) Navigator.move('up'); 
+            else Lampa.Controller.toggle('head');
           },
           down: function down() {
             if (Navigator.canmove('down')) Navigator.move('down');
@@ -893,6 +1317,7 @@
             _component.back();
           }
         });
+        
         Lampa.Controller.toggle('content');
       } catch (e) {
         console.error('Error in component start:', e);
@@ -907,172 +1332,214 @@
     };
 
     this.destroy = function () {
+      // Очищаем все таймеры дебаунсера
+      Object.values(_debounceTimers).forEach(function(timer) {
+        if (timer) clearTimeout(timer);
+      });
+      _debounceTimers = {};
+      
       network.clear();
-      if (items && items.length) {
-        items.forEach(function(item) {
-          if (item && item.destroy) item.destroy();
-        });
-      }
+      
+      items.forEach(function(item) {
+        if (item && item.destroy) item.destroy();
+      });
+      items = [];
+      stationMap = {};
+      
       scroll.destroy();
       html.remove();
-      items = [];
       network = null;
       genreFilter = null;
+      
+      // Очищаем кэши компонента
+      _cachedFavorites = null;
+      _cachedRecent = null;
     };
   }
 
+  // Оптимизированный визуализатор с управлением анимацией (для полноэкранного режима)
   function Info(station) {
-    var info_html = Lampa.Template.js('lamparadio_info');
-    var showAnalyzer = Lampa.Storage.field('lamparadio_show_analyzer');
+    var info_html = null;
+    var canvas = null;
+    var ctx = null;
+    var animationId = null;
+    var bufferLength = 0;
+    var isActive = false;
     
-    if (showAnalyzer) {
-      var canvas = info_html.find("canvas");
-      if (canvas) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        var ctx = canvas.getContext("2d");
-
-        var bufferLength = _analyser ? _analyser.frequencyBinCount : 1024;
-        var WIDTH = canvas.width;
-        var HEIGHT = canvas.height;
-        var barWidth = (WIDTH / bufferLength) * 2.5;
-        var barHeight;
-        var x = 0;
+    function initVisualizer() {
+      if (!info_html) return;
+      
+      canvas = info_html.find("canvas")[0];
+      if (!canvas) return;
+      
+      ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      if (_analyser) {
+        bufferLength = _analyser.frequencyBinCount;
+        // Пересоздаем массив под правильный размер
+        _freq = new Uint8Array(bufferLength);
+      }
+      
+      var showAnalyzer = Lampa.Storage.field('lamparadio_show_analyzer');
+      if (showAnalyzer) {
+        startVisualizer();
+      }
+    }
+    
+    function startVisualizer() {
+      if (animationId || !ctx || !canvas) return;
+      
+      isActive = true;
+      var requestFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+      
+      function renderFrame() {
+        if (!isActive || !ctx || !canvas) {
+          stopVisualizer();
+          return;
+        }
         
-        // Получаем настройки цветов
-        var analyzerColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
-        var analyzerBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
-        var analyzerOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
-        var analyzerGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
-        
-        // Парсим цвет в RGB
-        var parseColor = function(color) {
-          if (color.startsWith('#')) {
-            var r = parseInt(color.slice(1, 3), 16);
-            var g = parseInt(color.slice(3, 5), 16);
-            var b = parseInt(color.slice(5, 7), 16);
-            return {r: r, g: g, b: b};
-          } else if (color.startsWith('rgb')) {
-            var match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)/);
-            if (match) {
-              return {
-                r: parseInt(match[1]),
-                g: parseInt(match[2]),
-                b: parseInt(match[3]),
-                a: match[4] ? parseFloat(match[4]) : 1
-              };
-            }
+        try {
+          var width = canvas.width;
+          var height = canvas.height;
+          
+          // Очищаем canvas
+          ctx.clearRect(0, 0, width, height);
+          
+          var showAnalyzer = Lampa.Storage.field('lamparadio_show_analyzer');
+          if (!showAnalyzer || !_analyser || !played) {
+            animationId = requestFrame(renderFrame);
+            return;
           }
-          return {r: 255, g: 87, b: 34}; // оранжевый по умолчанию
-        };
-        
-        // Функция для получения цвета на основе позиции (для радуги)
-        function getRainbowColor(position) {
-          // position от 0 до 1
-          var hue = position * 360;
-          return 'hsl(' + hue + ', 100%, 50%)';
-        }
-        
-        // Функция для получения градиентного цвета
-        function getGradientColor(position) {
-          // Градиент от синего через зеленый к красному
-          var colors = [
-            {r: 0, g: 150, b: 255},   // синий
-            {r: 0, g: 255, b: 150},   // бирюзовый
-            {r: 0, g: 255, b: 0},     // зеленый
-            {r: 255, g: 255, b: 0},   // желтый
-            {r: 255, g: 100, b: 0},   // оранжевый
-            {r: 255, g: 0, b: 0}      // красный
-          ];
           
-          var index = Math.floor(position * (colors.length - 1));
-          var nextIndex = Math.min(index + 1, colors.length - 1);
-          var progress = (position * (colors.length - 1)) - index;
+          // Получаем данные частот
+          _analyser.getByteFrequencyData(_freq);
           
-          var color1 = colors[index];
-          var color2 = colors[nextIndex];
+          // Настройки визуализатора
+          var barWidth = (width / bufferLength) * 2.5;
+          var barHeight;
+          var x = 0;
           
-          var r = Math.round(color1.r + (color2.r - color1.r) * progress);
-          var g = Math.round(color1.g + (color2.g - color1.g) * progress);
-          var b = Math.round(color1.b + (color2.b - color1.b) * progress);
+          // Получаем настройки цветов
+          var analyzerColor = Lampa.Storage.field('lamparadio_analyzer_color') || DEFAULT_ANALYZER_COLOR;
+          var analyzerBgColor = Lampa.Storage.field('lamparadio_analyzer_bg_color') || DEFAULT_ANALYZER_BG_COLOR;
+          var analyzerOpacity = parseFloat(Lampa.Storage.field('lamparadio_analyzer_opacity')) || DEFAULT_ANALYZER_OPACITY;
+          var analyzerGlow = Lampa.Storage.field('lamparadio_analyzer_glow') || false;
           
-          return 'rgb(' + r + ',' + g + ',' + b + ')';
-        }
-        
-        function renderFrame() {
-          getFreqData(played);
-          
-          // Очищаем canvas с фоном
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          
-          // Заливаем фон, если задан
+          // Рисуем фон если нужно
           if (analyzerBgColor !== 'rgba(0, 0, 0, 0)') {
             ctx.fillStyle = analyzerBgColor;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillRect(0, 0, width, height);
           }
           
-          x = 0;
-          for (var i = 0; i < bufferLength; i++) {
-            barHeight = _freq[i] * 2;
+          // Оптимизация: отрисовываем только видимые столбцы
+          var maxBars = Math.min(bufferLength, Math.floor(width / (barWidth + 1)));
+          
+          for (var i = 0; i < maxBars; i++) {
+            barHeight = (_freq[i] / 255) * height * 0.8;
             
             // Динамическая прозрачность на основе высоты столбца
             var dynamicOpacity = (_freq[i] / 255) * analyzerOpacity;
             
             // Определяем цвет в зависимости от режима
-            var currentColor;
             if (analyzerColor === 'rainbow') {
               // Радужный режим
-              var position = i / bufferLength;
-              currentColor = getRainbowColor(position);
-              ctx.fillStyle = currentColor;
+              var hue = (i / maxBars) * 360;
+              ctx.fillStyle = 'hsla(' + hue + ', 100%, 50%, ' + dynamicOpacity + ')';
             } else if (analyzerColor === 'gradient') {
               // Градиентный режим
-              var position = i / bufferLength;
-              currentColor = getGradientColor(position);
-              ctx.fillStyle = currentColor;
+              var position = i / maxBars;
+              var colors = [
+                {r: 0, g: 150, b: 255},   // синий
+                {r: 0, g: 255, b: 150},   // бирюзовый
+                {r: 0, g: 255, b: 0},     // зеленый
+                {r: 255, g: 255, b: 0},   // желтый
+                {r: 255, g: 100, b: 0},   // оранжевый
+                {r: 255, g: 0, b: 0}      // красный
+              ];
+              
+              var index = Math.floor(position * (colors.length - 1));
+              var nextIndex = Math.min(index + 1, colors.length - 1);
+              var progress = (position * (colors.length - 1)) - index;
+              
+              var color1 = colors[index];
+              var color2 = colors[nextIndex];
+              
+              var r = Math.round(color1.r + (color2.r - color1.r) * progress);
+              var g = Math.round(color1.g + (color2.g - color1.g) * progress);
+              var b = Math.round(color1.b + (color2.b - color1.b) * progress);
+              
+              ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + dynamicOpacity + ')';
             } else {
               // Обычный цвет
               var color = parseColor(analyzerColor);
               // Градиент для столбцов
-              var gradient = ctx.createLinearGradient(x, HEIGHT - barHeight, x, HEIGHT);
+              var gradient = ctx.createLinearGradient(x, height - barHeight, x, height);
               gradient.addColorStop(0, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')');
               gradient.addColorStop(1, 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + (dynamicOpacity * 0.3) + ')');
               ctx.fillStyle = gradient;
             }
             
-            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-            
             // Добавляем свечение
             if (analyzerGlow) {
               ctx.shadowColor = analyzerColor === 'rainbow' || analyzerColor === 'gradient' 
-                ? currentColor 
-                : 'rgba(' + color.r + ',' + color.g + ',' + color.b + ',' + dynamicOpacity + ')';
+                ? ctx.fillStyle 
+                : 'rgba(255, 87, 34, ' + dynamicOpacity + ')';
               ctx.shadowBlur = 10;
               ctx.shadowOffsetX = 0;
               ctx.shadowOffsetY = 0;
-            } else {
+            }
+            
+            ctx.fillRect(x, height - barHeight, barWidth, barHeight);
+            
+            // Сбрасываем тень
+            if (analyzerGlow) {
               ctx.shadowColor = 'transparent';
               ctx.shadowBlur = 0;
             }
             
-            x += barWidth + 4;
+            x += barWidth + 1;
           }
           
-          // Сбрасываем тень после отрисовки всех столбцов
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-          
-          requestAnimationFrame(renderFrame);
+          ctx.globalAlpha = 1.0;
+        } catch (e) {
+          console.error('Visualizer error:', e);
+          stopVisualizer();
         }
-        renderFrame();
+        
+        if (isActive) {
+          animationId = requestFrame(renderFrame);
+        }
+      }
+      
+      renderFrame();
+    }
+    
+    function stopVisualizer() {
+      isActive = false;
+      if (animationId) {
+        var cancelFrame = window.cancelAnimationFrame || window.webkitCancelAnimationFrame;
+        cancelFrame(animationId);
+        animationId = null;
+      }
+      
+      if (ctx && canvas) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
     }
-
+    
     this.create = function () {
+      info_html = Lampa.Template.js('lamparadio_info');
+      
       var cover = Lampa.Template.js('lamparadio_cover');
       
       // Создаем бегущую строку в новом формате
-      var marqueeText = 'Сейчас играет : ' + station.title + ' в жанре ' + (station.genre || 'MISCELLANEOUS');
+      var marqueeText = 'Сейчас играет: ' + station.title;
+      if (station.genre && station.genre !== 'MISCELLANEOUS') {
+        marqueeText += ' • ' + station.genre;
+      }
+      
       cover.find('.lamparadio-cover__marquee-text').text(marqueeText);
 
       var img_box = cover.find('.lamparadio-cover__img-box');
@@ -1106,73 +1573,92 @@
       });
 
       document.body.append(info_html);
+      
+      // Инициализируем визуализатор после добавления в DOM
+      setTimeout(initVisualizer, 0);
     };
 
     this.destroy = function () {
+      stopVisualizer();
+      
       if (info_html && info_html.remove) {
         info_html.remove();
+        info_html = null;
       }
+      
+      canvas = null;
+      ctx = null;
     };
   }
 
   function Player() {
     var player_html = Lampa.Template.get('lamparadio_player', {});
     var url = '';
-    var screenreset;
-    var info;
+    var screenResetTimer = null;
+    var info = null;
+    var currentStationId = null;
 
     setupAudio();
 
     function prepare() {
+      if (!_audio) return;
+      
       _audio.src = url;
       _audio.preload = 'metadata';
       _audio.crossOrigin = 'anonymous';
       _audio.autoplay = false;
-      _audio.load();
-      start();
-    }
-
-    function start() {
-      var playPromise;
+      
       try {
-        playPromise = _audio.play();
-      } catch (e) { }
-      if (playPromise !== undefined) {
-        playPromise.then(function () {
-          console.log('Radio', 'start playing', url);
-        }).catch(function (e) {
-          console.log('Radio', 'play promise error:', e.message);
-        });
+        _audio.load();
+      } catch (e) {
+        console.error('Error loading audio:', e);
       }
+      
+      startPlayback();
     }
 
-    function play() {
-      if (_context && _context.state === 'suspended') {
-        _context.resume().then(function () {
-          console.log('Radio', 'Audio context has been resumed.');
+    function startPlayback() {
+      if (!_audio || !_context) return;
+      
+      // Возобновляем аудиоконтекст если нужно
+      if (_context.state === 'suspended') {
+        _context.resume().catch(function(e) {
+          console.error('Error resuming audio context:', e);
         });
       }
+      
       player_html.toggleClass('loading', true);
       player_html.toggleClass('stop', false);
-      prepare();
+      
+      var playPromise = _audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function (e) {
+          console.error('Play promise error:', e.message);
+          player_html.toggleClass('loading', false);
+        });
+      }
     }
 
     function stop() {
-      if (screenreset) {
-        clearInterval(screenreset);
-        screenreset = null;
-      }
+      clearScreenResetTimer();
       played = false;
+      
       player_html.toggleClass('stop', true);
       player_html.toggleClass('loading', false);
       
-      if (_audio) {
-        _audio.src = '';
-      }
+      stopAudio();
+      currentStationId = null;
       
       if (info) {
         info.destroy();
-        info = false;
+        info = null;
+      }
+    }
+    
+    function clearScreenResetTimer() {
+      if (screenResetTimer) {
+        clearInterval(screenResetTimer);
+        screenResetTimer = null;
       }
     }
 
@@ -1182,8 +1668,8 @@
     
     on("playing", function () {
       player_html.toggleClass('loading', false);
-      if (!screenreset) {
-        screenreset = setInterval(function () {
+      if (!screenResetTimer) {
+        screenResetTimer = setInterval(function () {
           Lampa.Screensaver.resetTimer();
         }, 5000);
       }
@@ -1192,31 +1678,56 @@
     on("waiting", function () {
       player_html.toggleClass('loading', true);
     });
+    
+    on("ended", function () {
+      stop();
+    });
+    
+    on("error", function (e) {
+      console.error('Audio error:', e);
+      player_html.toggleClass('loading', false);
+      Lampa.Noty.show('Ошибка воспроизведения станции');
+    });
 
     player_html.on('hover:enter', function () {
-      if (played) stop(); else if (url) play();
+      if (played) {
+        stop();
+      } else if (url) {
+        prepare();
+      }
     });
 
     this.create = function () {
       $('.head__actions .open--search').before(player_html);
     };
 
-    var curPlayID = null;
-
     this.play = function (station) {
+      // Останавливаем предыдущее воспроизведение
       if (window.currentPlayer && window.currentPlayer !== this && window.currentPlayer.destroy) {
         window.currentPlayer.destroy();
       }
       window.currentPlayer = this;
       
-      if (curPlayID !== station.id || !played) stop();
+      // Если та же станция уже играет - останавливаем
+      if (currentStationId === station.id && played) {
+        stop();
+        return;
+      }
       
       // Добавляем станцию в недавно прослушанные
       addRecentStation(station);
       
+      // Инициализируем визуализатор при первом запуске
+      initVisualizer();
+      updateVisualizer();
+      
       if (Lampa.Storage.field('lamparadio_show_info') === true) {
+        if (info) {
+          info.destroy();
+        }
         info = new Info(station);
         info.create();
+        
         Lampa.Controller.add('content', {
           invisible: true,
           toggle: function toggle() {
@@ -1228,7 +1739,7 @@
             document.body.removeClass('ambience--enable');
             if (info) {
               info.destroy();
-              info = false;
+              info = null;
             }
             if (_component) _component.activity.toggle();
             Lampa.Controller.toggle('content');
@@ -1237,16 +1748,16 @@
         Lampa.Controller.toggle('content');
       }
       
-      if (curPlayID !== station.id || !played) {
-        url = station.stream;
-        play();
-        curPlayID = station.id;
-      }
+      // Настраиваем и запускаем воспроизведение
+      url = station.stream;
+      currentStationId = station.id;
+      prepare();
       
       player_html.find('.lamparadio-player__name').text(station.title);
       player_html.toggleClass('hide', false);
+      
       var btn = player_html.find('.lamparadio-player__button');
-      if (btn) {
+      if (btn.length) {
         btn.css({
           "background-image": "url('" + station.largeimage + "')",
           "background-size": "cover"
@@ -1257,12 +1768,13 @@
     this.destroy = function () {
       stop();
       player_html.toggleClass('hide', true);
-      curPlayID = null;
+      currentStationId = null;
     };
   }
 
   function add() {
-    var icon = '<svg enable-background="new 0 0 533.3 377.1" viewBox="0 0 533.3 377.1" xmlns="http://www.w3.org/2000/svg"><path d="m266.7 121.9c36.8 0 66.7 29.8 66.7 66.7s-29.8 66.7-66.7 66.7-66.7-29.9-66.7-66.7 29.8-66.7 66.7-66.7zm-116.7 66.7c0 32.2 13.1 61.4 34.2 82.5l-35.4 35.4c-30.2-30.2-48.8-71.8-48.8-117.9 0-46 18.7-87.7 48.8-117.9l35.4 35.4c-21.1 21.1-34.2 50.2-34.2 82.5zm233.3 0c0-32.2-13.1-61.4-34.2-82.5l35.4-35.4c30.2 30.2 48.8 71.8 48.8 117.9 0 46-18.7 87.7-48.8 117.9l-35.4-35.4c21.2-21.2 34.2-50.3 34.2-82.5zm-333.3 0c0 59.8 24.3 114 63.5 153.2l-35.4 35.4c-48.3-48.3-78.1-115-78.1-188.6s29.8-140.3 78.1-188.6l35.4 35.4c-39.2 39.2-63.5 93.3-63.5 153.2zm433.3 0c0-59.8-24.3-114-63.5-153.2l35.4-35.4c48.3 48.3 78.1 114.9 78.1 188.6s-29.8 140.3-78.1 188.6l-35.4-35.4c39.3-39.2 63.5-93.4 63.5-153.2z" fill="#eee"/></svg>';
+    var icon = '<svg enable-background="new 0 0 533.3 377.1" viewBox="0 0 533.3 377.1" xmlns="http://www.w3.org/2000/svg"><path d="m266.7 121.9c36.8 0 66.7 29.8 66.7 66.7s-29.8 66.7-66.7 66.7-66.7-29.9-66.7-66.7 29.8-66.7 66.7-66.7zm-116.7 66.7c0 32.2 13.1 61.4 34.2 82.5l-35.4 35.4c-30.2-30.2-48.8-71.8-48.8-117.9 0-46 18.7-87.7 48.8-117.9l35.4 35.4c-21.1 21.1-34.2 50.2-34.2 82.5zm233.3 0c0-32.2-13.1-61.4-34.2-82.5l35.4-35.4c30.2 30.2 48.8 71.8 48.8 117.9 0 46-18.7 87.7-48.8 117.9l-35.4-35.4c21.2-21.2 34.2-50.3 34.2-82.5zm-333.3 0c0 59.8 24.3 114 63.5 153.2l-35.4 35.4c-48.3-48.3-78.1-115-78.1-188.6s29.8-140.3 78.1-188.6l35.4 35.4c-39.2 39.2-63.5 93.3-63.5 153.2zm433.3 0c0-59.8-24.3-114-63.5-153.2l35.4-35.4c48.3 48.3 78.1 115-78.1 188.6s-29.8 140.3-78.1 188.6l-35.4-35.4c39.3-39.2 63.5-93.4 63.5-153.2z" fill="#eee"/></svg>';
+    
     var menu_button = $('<li class="menu__item selector" data-action="radio">' +
       '<div class="menu__ico">' + icon + '</div>' +
       '<div class="menu__text">Radio</div>' +
@@ -1293,7 +1805,7 @@
     Lampa.SettingsApi.addComponent({
       component: 'lamparadio',
       name: 'Radio',
-      icon: '<svg enable-background="new 0 0 533.3 377.1" viewBox="0 0 533.3 377.1" xmlns="http://www.w3.org/2000/svg"><path d="m266.7 121.9c36.8 0 66.7 29.8 66.7 66.7s-29.8 66.7-66.7 66.7-66.7-29.9-66.7-66.7 29.8-66.7 66.7-66.7zm-116.7 66.7c0 32.2 13.1 61.4 34.2 82.5l-35.4 35.4c-30.2-30.2-48.8-71.8-48.8-117.9 0-46 18.7-87.7 48.8-117.9l35.4 35.4c-21.1 21.1-34.2 50.2-34.2 82.5zm233.3 0c0-32.2-13.1-61.4-34.2-82.5l35.4-35.4c30.2 30.2 48.8 71.8 48.8 117.9 0 46-18.7 87.7-48.8 117.9l-35.4-35.4c21.2-21.2 34.2-50.3 34.2-82.5zm1.1-333.3 0c0 59.8 24.3 114 63.5 153.2l-35.4 35.4c-48.3-48.3-78.1-115-78.1-188.6s29.8-140.3 78.1-188.6l35.4 35.4c-39.2 39.2-63.5 93.3-63.5 153.2zm433.3 0c0-59.8-24.3-114-63.5-153.2l35.4-35.4c48.3 48.3 78.1 114.9 78.1 188.6s-29.8 140.3-78.1 188.6l-35.4-35.4c39.3-39.2 63.5-93.4 63.5-153.2z" fill="#eee"/></svg>'
+      icon: '<svg enable-background="new 0 0 533.3 377.1" viewBox="0 0 533.3 377.1" xmlns="http://www.w3.org/2000/svg"><path d="m266.7 121.9c36.8 0 66.7 29.8 66.7 66.7s-29.8 66.7-66.7 66.7-66.7-29.9-66.7-66.7 29.8-66.7 66.7-66.7zm-116.7 66.7c0 32.2 13.1 61.4 34.2 82.5l-35.4 35.4c-30.2-30.2-48.8-71.8-48.8-117.9 0-46 18.7-87.7 48.8-117.9l35.4 35.4c-21.1 21.1-34.2 50.2-34.2 82.5zm233.3 0c0-32.2-13.1-61.4-34.2-82.5l35.4-35.4c30.2 30.2 48.8 71.8 48.8 117.9 0 46-18.7 87.7-48.8 117.9l-35.4-35.4c21.2-21.2 34.2-50.3 34.2-82.5zm-333.3 0c0 59.8 24.3 114 63.5 153.2l-35.4 35.4c-48.3-48.3-78.1-115-78.1-188.6s29.8-140.3 78.1-188.6l35.4 35.4c-39.2 39.2-63.5 93.3-63.5 153.2zm433.3 0c0-59.8-24.3-114-63.5-153.2l35.4-35.4c48.3 48.3 78.1 115-78.1 188.6s-29.8 140.3-78.1 188.6l-35.4-35.4c39.3-39.2 63.5-93.4 63.5-153.2z" fill="#eee"/></svg>'
     });
 
     Lampa.SettingsApi.addParam({
@@ -1321,7 +1833,12 @@
         name: 'Показать визуализатор',
         description: 'Анализатор аудиоспектра на заднем плане'
       },
-      onRender: function onRender(item) { }
+      onRender: function onRender(item) { 
+        // Добавляем обработчик изменения состояния
+        item.find('input[type="checkbox"]').on('change', function() {
+          updateVisualizer();
+        });
+      }
     });
 
     // Новая настройка: Пресеты цветов
@@ -1345,7 +1862,10 @@
         // Добавляем пресеты
         COLOR_PRESETS.forEach(function(preset) {
           var presetElement = $('<div class="lamparadio-preset" data-preset-id="' + preset.id + '">' +
-            '<div class="lamparadio-preset__color" style="background-color: ' + (preset.color === 'rainbow' ? 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)' : preset.color === 'gradient' ? 'linear-gradient(90deg, blue, green, yellow, orange, red)' : preset.color) + '"></div>' +
+            '<div class="lamparadio-preset__color" style="background: ' + 
+            (preset.color === 'rainbow' ? 'linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet)' : 
+             preset.color === 'gradient' ? 'linear-gradient(90deg, blue, cyan, green, yellow, orange, red)' : 
+             preset.color) + '"></div>' +
             '<div class="lamparadio-preset__name">' + preset.name + '</div>' +
             '</div>');
           
@@ -1362,6 +1882,9 @@
             
             // Обновляем остальные настройки цветов, если они уже отображены
             updateColorSettings(preset);
+            
+            // Обновляем визуализатор
+            updateVisualizer();
           });
           
           presetsContainer.append(presetElement);
@@ -1408,6 +1931,11 @@
         // Добавляем подсказку о формате цвета
         var description = item.find('.settings-param__descr');
         description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Примеры: #FF5722 (оранжевый), #2196F3 (синий), #4CAF50 (зеленый), #FF4081 (розовый)</div>');
+        
+        // Добавляем обработчик изменения
+        item.find('input').on('input', function() {
+          updateVisualizer();
+        });
       }
     });
 
@@ -1426,6 +1954,11 @@
       onRender: function onRender(item) {
         var description = item.find('.settings-param__descr');
         description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Прозрачный фон: rgba(0,0,0,0), Чёрный: rgba(0,0,0,0.3)</div>');
+        
+        // Добавляем обработчик изменения
+        item.find('input').on('input', function() {
+          updateVisualizer();
+        });
       }
     });
 
@@ -1444,6 +1977,11 @@
       onRender: function onRender(item) {
         var description = item.find('.settings-param__descr');
         description.append('<div style="margin-top: 5px; font-size: 0.9em; opacity: 0.8;">Рекомендуется: 0.3-0.8</div>');
+        
+        // Добавляем обработчик изменения
+        item.find('input').on('input', function() {
+          updateVisualizer();
+        });
       }
     });
 
@@ -1459,7 +1997,12 @@
         name: 'Эффект свечения',
         description: 'Добавить свечение к столбцам визуализатора'
       },
-      onRender: function onRender(item) { }
+      onRender: function onRender(item) { 
+        // Добавляем обработчик изменения
+        item.find('input[type="checkbox"]').on('change', function() {
+          updateVisualizer();
+        });
+      }
     });
 
     // Новая настройка: скрыть логотип станции
@@ -1545,7 +2088,7 @@
 
     var manifest = {
       type: 'audio',
-      version: '1.4.0',
+      version: '1.4.1', // Увеличиваем версию
       name: 'Радио',
       description: 'Коллекция радиостанций с избранным и историей прослушивания',
       component: 'lamparadio'
