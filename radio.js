@@ -844,6 +844,18 @@
       };
       img_elm.src = station.largeimage;
 
+      // Проверяем настройки и добавляем соответствующие CSS классы
+      var hideLogo = Lampa.Storage.field('lamparadio_hide_logo');
+      var hideMarquee = Lampa.Storage.field('lamparadio_hide_marquee');
+      
+      if (hideLogo === true) {
+        img_box.addClass('lamparadio-hide-logo');
+      }
+      
+      if (hideMarquee === true) {
+        cover.find('.lamparadio-cover__marquee').addClass('lamparadio-hide-marquee');
+      }
+
       info_html.find('.lamparadio-info__cover').append(cover);
       info_html.find('.lamparadio-info__close').on('click', function () {
         window.history.back();
@@ -1068,6 +1080,36 @@
       onRender: function onRender(item) { }
     });
 
+    // Новая настройка: скрыть логотип станции
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_hide_logo',
+        type: 'trigger',
+        "default": false
+      },
+      field: {
+        name: 'Скрыть логотип в полном экране',
+        description: 'Изображение загружается, но не отображается'
+      },
+      onRender: function onRender(item) { }
+    });
+
+    // Новая настройка: скрыть бегущую строку
+    Lampa.SettingsApi.addParam({
+      component: 'lamparadio',
+      param: {
+        name: 'lamparadio_hide_marquee',
+        type: 'trigger',
+        "default": false
+      },
+      field: {
+        name: 'Скрыть бегущую строку в полном экране',
+        description: 'Текст загружается, но не отображается'
+      },
+      onRender: function onRender(item) { }
+    });
+
     // Информационный пункт о поддержке
     Lampa.SettingsApi.addParam({
       component: 'lamparadio',
@@ -1179,6 +1221,8 @@
       '.lamparadio-info-support__text { font-size: 1em; line-height: 1.4; color: rgba(255,255,255,0.8); margin-bottom: 0.5em; }' +
       '.lamparadio-info-support__highlight { color: #4CAF50; font-weight: bold; }' +
       '.lamparadio-info-support__footer { font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: 1em; }' +
+      '.lamparadio-hide-logo { display: none !important; }' +
+      '.lamparadio-hide-marquee { display: none !important; }' +
       '@media screen and (max-width: 580px) { .lamparadio-item { width: 21%; } }' +
       '@media screen and (max-width: 385px) { .lamparadio-item__name { display: none; } .lamparadio-item__favorite { width: 1em; height: 1em; } }' +
       '.lamparadio-player { display: -webkit-box; display: -webkit-flex; display: -moz-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -webkit-align-items: center; -moz-box-align: center; -ms-flex-align: center; align-items: center; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em; padding: 0.2em 0.4em; margin-left: 0.5em; margin-right: 0.5em; }' +
