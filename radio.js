@@ -1,7 +1,5 @@
-//Добавляет в избранное и работает история.
 (function () {
   'use strict';
-
   var API_URL = 'https://raw.githubusercontent.com/hempboy/LampaRadioPlugin/refs/heads/main/stations.json';
   var IMG_BG = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAADUlEQVR42gECAP3/AAAAAgABUyucMAAAAABJRU5ErkJggg=='; // black
   var _context = null;
